@@ -69,7 +69,7 @@ class RectEIT:
     EIT_COMMS = {'port': 'COM9', 'baudrate': 9600}  # timeout: 5
 
     # file paths
-    _OUTPUT_FILE = 'output/EIT_Data_Gelatin_4_dof_Set_5.xlsx'
+    _OUTPUT_FILE = 'output/EIT_Data_Gelatin_4_dof_Set_6.xlsx'
     _OUTPUT_BASELINE = 'output/EIT_Baselines.xlsx'
     _LOG_FILE = 'output/EIT_log.txt'
     _NOTIFIER_SCRIPT = 'exp_complete_notifier.ps1'
