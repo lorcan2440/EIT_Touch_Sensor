@@ -10,11 +10,9 @@ To develop a robot e-skin which can be pressed with up to six fingers and determ
 
 ### Initial Setup
 
-![Video](media/two_finger_training.mp4)
-
 https://github.com/lorcan2440/EIT_Touch_Sensor/assets/72615977/d13ff44b-83f8-4365-8381-2579f5ffa7c4
 
-![Setup](media/first_setup_labelled.jpg)
+![Setup](media/first_setup_labelled.jpg | width=100)
 
 A sensorised gelatin hydrogel is made and cast into a laser-cut rectangular frame. Electrodes are in contact with the skin and connected to a microcontroller (ATtiny AVR) which can measure impedances at high frequency.
 
