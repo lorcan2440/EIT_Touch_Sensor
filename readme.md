@@ -24,7 +24,7 @@ The robot and microcontrollers are programmed (Python, C++) to press the skin at
 
 ![Robot coordinates](media/robot_coords.png)
 
-The EIT readings (voltages relative to untouched baseline) and true positions (encoded as a binary displacement map) are used as the $(\bold{X}, \bold{y})$ datasets to train a series of machine learning algorithms: regression and neural networks.
+The EIT readings (voltages relative to untouched baseline) and true positions (encoded as a binary displacement map) are used as the $(\mathbf{X}, \mathbf{y})$ datasets to train a series of machine learning algorithms: regression and neural networks.
 
 Once an optimally trained model is found, when the skin receives a new press, it will perform the EIT experiment, use the model to predict the position, and show the position on the computer screen.
 
