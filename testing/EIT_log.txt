@@ -1,0 +1,357 @@
+2023-08-08 17:02:23,112 - INFO - Robot initial position: [-0.492512, -0.286142, 0.220541, -2.95678, -1.01844, 0.0479031]
+2023-08-08 17:02:23,120 - INFO - Robot initial joint angles: [0.298815, -1.05058, 1.28101, -4.97434, 1.58173, 4.34788]
+2023-08-08 17:02:23,122 - WARNING - ------ Start of trial 1 / 16 ------ 
+2023-08-08 17:02:23,124 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-08 17:02:23,298 - INFO - Baseline EIT data obtained.
+2023-08-08 17:02:23,462 - INFO - Created new Excel file testing/EIT_Baselines.xlsx.
+2023-08-08 17:02:23,492 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 2 to 2.
+2023-08-08 17:02:23,591 - INFO - Moving to position: (x0, x1, y0, y1) = (40.32, 53.41, 93.46, 26.9); d = 67.83 [mm].
+2023-08-08 17:02:26,232 - INFO - Gear(s) moving: dist 67.83 mm, down. Sending serial byte b'\xc3'
+2023-08-08 17:04:25,170 - INFO - Robot initial position: [-0.517379, -0.228105, 0.194639, -2.83761, -1.29711, 0.0678351]
+2023-08-08 17:04:25,178 - INFO - Robot initial joint angles: [0.155637, -1.03841, 1.32742, -5.04931, 1.57707, 4.01078]
+2023-08-08 17:04:28,011 - WARNING - The robot is moving to its starting position.
+2023-08-08 17:04:51,633 - WARNING - ------ Start of trial 1 / 16 ------ 
+2023-08-08 17:04:51,635 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-08 17:04:51,803 - INFO - Baseline EIT data obtained.
+2023-08-08 17:04:51,854 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 3 to 3.
+2023-08-08 17:04:51,968 - INFO - Moving to position: (x0, x1, y0, y1) = (61.68, 30.57, 93.11, 24.1); d = 75.7 [mm].
+2023-08-08 17:04:55,361 - INFO - Gear(s) moving: dist 75.7 mm, down. Sending serial byte b'\xcd'
+2023-08-08 17:04:58,970 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:05:02,436 - INFO - Created new Excel file testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx.
+2023-08-08 17:05:02,471 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 2 to 2.
+2023-08-08 17:05:02,603 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 2 to 2.
+2023-08-08 17:05:02,635 - INFO - Trial 1 / 16 done. Expected time remaining: 00h02m45s.
+2023-08-08 17:05:02,635 - WARNING - ------ Start of trial 2 / 16 ------ 
+2023-08-08 17:05:02,638 - INFO - Moving to position: (x0, x1, y0, y1) = (48.3, 54.62, 48.78, 19.61); d = 29.85 [mm].
+2023-08-08 17:05:05,047 - INFO - Gear(s) moving: dist 29.85 mm, down. Sending serial byte b'\x92'
+2023-08-08 17:05:08,668 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:05:11,614 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 3 to 3.
+2023-08-08 17:05:11,787 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 3 to 3.
+2023-08-08 17:05:11,826 - INFO - Trial 2 / 16 done. Expected time remaining: 00h02m21s.
+2023-08-08 17:05:11,827 - WARNING - ------ Start of trial 3 / 16 ------ 
+2023-08-08 17:05:11,830 - INFO - Moving to position: (x0, x1, y0, y1) = (24.34, 51.22, 71.16, 38.08); d = 42.62 [mm].
+2023-08-08 17:05:14,680 - INFO - Gear(s) moving: dist 42.62 mm, down. Sending serial byte b'\xa3'
+2023-08-08 17:05:18,307 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:05:22,006 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 4 to 4.
+2023-08-08 17:05:22,171 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 4 to 4.
+2023-08-08 17:05:22,219 - INFO - Trial 3 / 16 done. Expected time remaining: 00h02m13s.
+2023-08-08 17:05:22,219 - WARNING - ------ Start of trial 4 / 16 ------ 
+2023-08-08 17:05:22,222 - INFO - Moving to position: (x0, x1, y0, y1) = (17.54, 30.82, 52.62, 65.76); d = 18.68 [mm].
+2023-08-08 17:05:27,207 - INFO - Gear(s) moving: dist 18.68 mm, down. Sending serial byte b'\x84'
+2023-08-08 17:05:30,830 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:05:36,236 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 5 to 5.
+2023-08-08 17:05:36,417 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 5 to 5.
+2023-08-08 17:05:36,474 - INFO - Trial 4 / 16 done. Expected time remaining: 00h02m15s.
+2023-08-08 17:05:36,474 - WARNING - ------ Start of trial 5 / 16 ------ 
+2023-08-08 17:05:36,487 - INFO - Moving to position: (x0, x1, y0, y1) = (13.53, 57.79, 63.44, 91.82); d = 52.58 [mm].
+2023-08-08 17:05:40,054 - INFO - Gear(s) moving: dist 52.58 mm, down. Sending serial byte b'\xaf'
+2023-08-08 17:05:43,667 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:05:48,873 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 6 to 6.
+2023-08-08 17:05:49,070 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_1.xlsx) from rows 6 to 6.
+2023-08-08 17:05:49,137 - INFO - Trial 5 / 16 done. Expected time remaining: 00h02m06s.
+2023-08-08 17:05:49,137 - WARNING - ------ Start of trial 6 / 16 ------ 
+2023-08-08 17:05:49,140 - INFO - Moving to position: (x0, x1, y0, y1) = (20.1, 51.03, 65.93, 71.28); d = 31.39 [mm].
+2023-08-08 17:05:52,878 - INFO - Gear(s) moving: dist 31.39 mm, down. Sending serial byte b'\x94'
+2023-08-08 17:05:56,487 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:06:01,413 - INFO - Created new Excel file testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx.
+2023-08-08 17:06:01,444 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 2 to 2.
+2023-08-08 17:06:01,637 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 2 to 2.
+2023-08-08 17:06:01,675 - INFO - Trial 6 / 16 done. Expected time remaining: 00h01m57s.
+2023-08-08 17:06:01,676 - WARNING - ------ Start of trial 7 / 16 ------ 
+2023-08-08 17:06:01,686 - INFO - Moving to position: (x0, x1, y0, y1) = (15.56, 54.1, 49.65, 73.41); d = 45.28 [mm].
+2023-08-08 17:06:05,548 - INFO - Gear(s) moving: dist 45.28 mm, down. Sending serial byte b'\xa6'
+2023-08-08 17:06:09,176 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:06:14,303 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 3 to 3.
+2023-08-08 17:06:14,442 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 3 to 3.
+2023-08-08 17:06:14,486 - INFO - Trial 7 / 16 done. Expected time remaining: 00h01m47s.
+2023-08-08 17:06:14,487 - WARNING - ------ Start of trial 8 / 16 ------ 
+2023-08-08 17:06:14,491 - INFO - Moving to position: (x0, x1, y0, y1) = (18.16, 45.0, 76.81, 99.82); d = 35.35 [mm].
+2023-08-08 17:06:18,980 - INFO - Gear(s) moving: dist 35.35 mm, down. Sending serial byte b'\x99'
+2023-08-08 17:06:22,598 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:06:27,883 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 4 to 4.
+2023-08-08 17:06:28,076 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 4 to 4.
+2023-08-08 17:06:28,124 - INFO - Trial 8 / 16 done. Expected time remaining: 00h01m36s.
+2023-08-08 17:06:28,125 - WARNING - ------ Start of trial 9 / 16 ------ 
+2023-08-08 17:06:28,132 - INFO - Moving to position: (x0, x1, y0, y1) = (12.8, 31.28, 101.91, 40.11); d = 64.5 [mm].
+2023-08-08 17:06:30,939 - INFO - Gear(s) moving: dist 64.5 mm, down. Sending serial byte b'\xbf'
+2023-08-08 17:06:34,592 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:06:37,716 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 5 to 5.
+2023-08-08 17:06:37,905 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 5 to 5.
+2023-08-08 17:06:37,993 - INFO - Trial 9 / 16 done. Expected time remaining: 00h01m23s.
+2023-08-08 17:06:37,994 - WARNING - ------ Start of trial 10 / 16 ------ 
+2023-08-08 17:06:38,004 - INFO - Moving to position: (x0, x1, y0, y1) = (35.81, 23.79, 70.95, 16.66); d = 55.6 [mm].
+2023-08-08 17:06:40,115 - INFO - Gear(s) moving: dist 55.6 mm, down. Sending serial byte b'\xb3'
+2023-08-08 17:06:43,729 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:06:46,700 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 6 to 6.
+2023-08-08 17:06:46,916 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_2.xlsx) from rows 6 to 6.
+2023-08-08 17:06:47,029 - INFO - Trial 10 / 16 done. Expected time remaining: 00h01m09s.
+2023-08-08 17:06:47,029 - WARNING - ------ Start of trial 11 / 16 ------ 
+2023-08-08 17:06:47,030 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-08 17:06:47,189 - INFO - Baseline EIT data obtained.
+2023-08-08 17:06:47,242 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 4 to 4.
+2023-08-08 17:06:47,348 - INFO - Moving to position: (x0, x1, y0, y1) = (32.42, 42.8, 71.46, 34.25); d = 38.63 [mm].
+2023-08-08 17:06:49,403 - INFO - Gear(s) moving: dist 38.63 mm, down. Sending serial byte b'\x9e'
+2023-08-08 17:06:52,998 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:06:56,218 - INFO - Created new Excel file testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx.
+2023-08-08 17:06:56,250 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 2 to 2.
+2023-08-08 17:06:56,401 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 2 to 2.
+2023-08-08 17:06:56,449 - INFO - Trial 11 / 16 done. Expected time remaining: 00h00m57s.
+2023-08-08 17:06:56,450 - WARNING - ------ Start of trial 12 / 16 ------ 
+2023-08-08 17:06:56,458 - INFO - Moving to position: (x0, x1, y0, y1) = (13.27, 65.67, 93.02, 33.97); d = 78.95 [mm].
+2023-08-08 17:06:59,354 - INFO - Gear(s) moving: dist 78.95 mm, down. Sending serial byte b'\xd1'
+2023-08-08 17:07:03,001 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:07:06,733 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 3 to 3.
+2023-08-08 17:07:06,927 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 3 to 3.
+2023-08-08 17:07:06,977 - INFO - Trial 12 / 16 done. Expected time remaining: 00h00m45s.
+2023-08-08 17:07:06,977 - WARNING - ------ Start of trial 13 / 16 ------ 
+2023-08-08 17:07:06,986 - INFO - Moving to position: (x0, x1, y0, y1) = (48.59, 37.12, 46.32, 24.15); d = 24.96 [mm].
+2023-08-08 17:07:09,961 - INFO - Gear(s) moving: dist 24.96 mm, down. Sending serial byte b'\x8c'
+2023-08-08 17:07:13,598 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:07:16,992 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 4 to 4.
+2023-08-08 17:07:17,151 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 4 to 4.
+2023-08-08 17:07:17,204 - INFO - Trial 13 / 16 done. Expected time remaining: 00h00m34s.
+2023-08-08 17:07:17,204 - WARNING - ------ Start of trial 14 / 16 ------ 
+2023-08-08 17:07:17,210 - INFO - Moving to position: (x0, x1, y0, y1) = (54.29, 61.81, 86.94, 70.57); d = 18.02 [mm].
+2023-08-08 17:07:20,201 - INFO - Gear(s) moving: dist 18.02 mm, down. Sending serial byte b'\x83'
+2023-08-08 17:07:23,838 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:07:27,230 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 5 to 5.
+2023-08-08 17:07:27,418 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 5 to 5.
+2023-08-08 17:07:27,481 - INFO - Trial 14 / 16 done. Expected time remaining: 00h00m22s.
+2023-08-08 17:07:27,482 - WARNING - ------ Start of trial 15 / 16 ------ 
+2023-08-08 17:07:27,489 - INFO - Moving to position: (x0, x1, y0, y1) = (46.63, 46.77, 104.49, 28.43); d = 76.06 [mm].
+2023-08-08 17:07:28,760 - INFO - Gear(s) moving: dist 76.06 mm, down. Sending serial byte b'\xcd'
+2023-08-08 17:07:32,374 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:07:34,524 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 6 to 6.
+2023-08-08 17:07:34,712 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_3.xlsx) from rows 6 to 6.
+2023-08-08 17:07:34,776 - INFO - Trial 15 / 16 done. Expected time remaining: 00h00m11s.
+2023-08-08 17:07:34,776 - WARNING - ------ Start of trial 16 / 16 ------ 
+2023-08-08 17:07:34,784 - INFO - Moving to position: (x0, x1, y0, y1) = (28.34, 20.85, 60.79, 40.9); d = 21.26 [mm].
+2023-08-08 17:07:37,504 - INFO - Gear(s) moving: dist 21.26 mm, down. Sending serial byte b'\x87'
+2023-08-08 17:07:41,123 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 17:07:44,473 - INFO - Created new Excel file testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_4.xlsx.
+2023-08-08 17:07:44,502 - INFO - Appending data in Voltages (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_4.xlsx) from rows 2 to 2.
+2023-08-08 17:07:44,663 - INFO - Appending data in Positions (testing/EIT_Data_Gelatin_2_fingers_4_dof_Set_4.xlsx) from rows 2 to 2.
+2023-08-08 17:07:44,694 - INFO - Merging file fragments into testing/EIT_Data_Gelatin_2_fingers_4_dof.xlsx.
+2023-08-08 17:07:46,820 - INFO - Deleting file fragments.
+2023-08-08 17:07:46,822 - INFO - Trial 16 / 16 done. Expected time remaining: 00h00m00s.
+2023-08-08 17:07:46,823 - INFO - Randomised data collection complete. 16 data points obtained.
+2023-08-08 17:07:49,200 - INFO - Closing all serial connections.
+2023-08-09 11:17:47,662 - INFO - Robot initial position: [-0.569443, -0.254842, 0.216589, 3.12942, -0.0651568, -0.0603431]
+2023-08-09 11:17:47,677 - INFO - Robot initial joint angles: [0.270074, -0.898798, 1.04533, -4.89946, 1.56966, 5.02451]
+2023-08-09 11:17:50,993 - WARNING - The robot is moving to its starting position.
+2023-08-09 11:17:58,060 - INFO - Testing corner calibration positions. The robot will move to the four corners of the frame.
+2023-08-09 11:17:58,061 - WARNING - The robot is about to move to the corner near Electrode 1 (origin).
+2023-08-09 11:18:05,452 - WARNING - The robot is about to move to the corner near Electrode 10 (y-axis limit).
+2023-08-09 11:18:16,356 - WARNING - The robot is about to move to the corner near Electrode 26 (x-axis limit).
+2023-08-09 11:18:24,915 - WARNING - The robot is about to move to the corner near Electrode 17 (opposite origin).
+2023-08-09 11:18:27,371 - WARNING - The robot is about to return to the origin.
+2023-08-09 11:18:33,892 - INFO - Corner calibration positions test complete. Current position matches origin to within 1 mm.
+2023-08-09 11:18:33,894 - INFO - Testing gear motor: close -> open -> close -> up -> down.
+2023-08-09 11:18:33,895 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:18:35,408 - INFO - Gear(s) moving: dist 85.0 mm, down. Sending serial byte b'\xd9'
+2023-08-09 11:18:36,919 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:18:38,433 - INFO - Gear(s) moving: dist 15.0 mm, up. Sending serial byte b'\x00'
+2023-08-09 11:18:39,947 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:19:29,399 - INFO - Robot initial position: [-0.57656, -0.314851, 0.219997, -3.13673, 0.0737937, 0.0473117]
+2023-08-09 11:19:29,408 - INFO - Robot initial joint angles: [0.367894, -0.788642, 0.84878, -4.79943, 1.58419, 5.12764]
+2023-08-09 11:19:34,832 - WARNING - The robot is moving to its starting position.
+2023-08-09 11:19:35,055 - INFO - Testing corner calibration positions. The robot will move to the four corners of the frame.
+2023-08-09 11:19:35,057 - WARNING - The robot is about to move to the corner near Electrode 1 (origin).
+2023-08-09 11:19:35,375 - WARNING - The robot is about to move to the corner near Electrode 10 (y-axis limit).
+2023-08-09 11:19:37,967 - WARNING - The robot is about to move to the corner near Electrode 26 (x-axis limit).
+2023-08-09 11:19:40,424 - WARNING - The robot is about to move to the corner near Electrode 17 (opposite origin).
+2023-08-09 11:19:42,647 - WARNING - The robot is about to return to the origin.
+2023-08-09 11:19:45,119 - INFO - Corner calibration positions test complete. Current position matches origin to within 1 mm.
+2023-08-09 11:19:45,119 - INFO - Testing gear motor: close -> open -> close -> up -> down.
+2023-08-09 11:19:45,119 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:19:46,635 - INFO - Gear(s) moving: dist 85.0 mm, down. Sending serial byte b'\xd9'
+2023-08-09 11:19:48,140 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:19:49,652 - INFO - Gear(s) moving: dist 15.0 mm, up. Sending serial byte b'\x00'
+2023-08-09 11:19:51,168 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:19:53,194 - INFO - Gear(s) moving: dist 85.0 mm, down. Sending serial byte b'\xd9'
+2023-08-09 11:19:54,708 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:19:56,222 - INFO - Gear(s) moving: dist 15.0 mm, up. Sending serial byte b'\x00'
+2023-08-09 11:19:57,725 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:19:59,745 - INFO - Motor test complete.
+2023-08-09 11:19:59,747 - WARNING - ------ Start of trial 1 / 16 ------ 
+2023-08-09 11:19:59,748 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-09 11:19:59,922 - INFO - Baseline EIT data obtained.
+2023-08-09 11:20:00,028 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 5 to 5.
+2023-08-09 11:20:00,161 - WARNING - Position is invalid. Trying again with swapped order of fingers.
+2023-08-09 11:20:00,162 - ERROR - Both orders failed to produce a valid position. Aborting.
+2023-08-09 11:23:02,125 - INFO - Robot initial position: [-0.576554, -0.314926, 0.219941, -3.13688, 0.0736155, 0.0463339]
+2023-08-09 11:23:02,132 - INFO - Robot initial joint angles: [0.36793, -0.788355, 0.848349, -4.79883, 1.58386, 5.12755]
+2023-08-09 11:23:08,476 - WARNING - The robot is moving to its starting position.
+2023-08-09 11:23:08,628 - INFO - Testing corner calibration positions. The robot will move to the four corners of the frame.
+2023-08-09 11:23:08,630 - WARNING - The robot is about to move to the corner near Electrode 1 (origin).
+2023-08-09 11:23:09,900 - WARNING - The robot is about to move to the corner near Electrode 10 (y-axis limit).
+2023-08-09 11:23:13,380 - WARNING - The robot is about to move to the corner near Electrode 26 (x-axis limit).
+2023-08-09 11:23:16,836 - WARNING - The robot is about to move to the corner near Electrode 17 (opposite origin).
+2023-08-09 11:23:19,500 - WARNING - The robot is about to return to the origin.
+2023-08-09 11:23:22,973 - INFO - Corner calibration positions test complete. Current position matches origin to within 1 mm.
+2023-08-09 11:23:22,974 - INFO - Testing gear motor: close -> open -> close -> up -> down.
+2023-08-09 11:23:22,976 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:23:24,480 - INFO - Gear(s) moving: dist 85.0 mm, down. Sending serial byte b'\xd9'
+2023-08-09 11:23:25,993 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:23:27,505 - INFO - Gear(s) moving: dist 15.0 mm, up. Sending serial byte b'\x00'
+2023-08-09 11:23:29,021 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:23:31,034 - INFO - Gear(s) moving: dist 85.0 mm, down. Sending serial byte b'\xd9'
+2023-08-09 11:23:32,550 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:23:34,061 - INFO - Gear(s) moving: dist 15.0 mm, up. Sending serial byte b'\x00'
+2023-08-09 11:23:35,569 - INFO - Gear(s) moving: dist 15.0 mm, down. Sending serial byte b'\x80'
+2023-08-09 11:23:37,593 - INFO - Motor test complete.
+2023-08-09 11:23:37,595 - WARNING - ------ Start of trial 1 / 16 ------ 
+2023-08-09 11:23:37,597 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-09 11:23:37,778 - INFO - Baseline EIT data obtained.
+2023-08-09 11:23:37,861 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 6 to 6.
+2023-08-09 11:26:07,467 - INFO - Robot initial position: [-0.576515, -0.314902, 0.220039, -3.13693, 0.0737162, 0.0469229]
+2023-08-09 11:26:07,475 - INFO - Robot initial joint angles: [0.367906, -0.788642, 0.84866, -4.79914, 1.58391, 5.12763]
+2023-08-09 11:26:08,629 - WARNING - The robot is moving to its starting position.
+2023-08-09 11:26:08,771 - WARNING - ------ Start of trial 1 / 16 ------ 
+2023-08-09 11:26:08,772 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-09 11:26:08,932 - INFO - Baseline EIT data obtained.
+2023-08-09 11:26:09,028 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 7 to 7.
+2023-08-09 11:26:09,163 - INFO - Moving to position: (x, y) = (50.94, 43.32).
+2023-08-09 11:26:09,163 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:28:51,702 - INFO - Robot initial position: [-0.523844, -0.273106, 0.200172, -3.12605, 0.0653181, 0.0336027]
+2023-08-09 11:28:51,710 - INFO - Robot initial joint angles: [0.332229, -0.960907, 1.19479, -4.96174, 1.59009, 5.08658]
+2023-08-09 11:28:57,721 - WARNING - The robot is moving to its starting position.
+2023-08-09 11:29:05,741 - WARNING - ------ Start of trial 1 / 16 ------ 
+2023-08-09 11:29:05,743 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-09 11:29:05,910 - INFO - Baseline EIT data obtained.
+2023-08-09 11:29:06,004 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 8 to 8.
+2023-08-09 11:29:06,149 - INFO - Moving to position: (x, y) = (45.24, 67.53).
+2023-08-09 11:29:06,149 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:29:12,092 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:29:14,053 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:29:15,768 - INFO - Created new Excel file output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx.
+2023-08-09 11:29:15,799 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 2 to 2.
+2023-08-09 11:29:15,949 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 2 to 2.
+2023-08-09 11:29:15,982 - INFO - Trial 1 / 16 done. Expected time remaining: 00h02m34s.
+2023-08-09 11:29:15,983 - WARNING - ------ Start of trial 2 / 16 ------ 
+2023-08-09 11:29:15,989 - INFO - Moving to position: (x, y) = (62.51, 69.23).
+2023-08-09 11:29:15,990 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:29:20,449 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:29:22,413 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:29:23,986 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 3 to 3.
+2023-08-09 11:29:24,121 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 3 to 3.
+2023-08-09 11:29:24,160 - INFO - Trial 2 / 16 done. Expected time remaining: 00h02m09s.
+2023-08-09 11:29:24,160 - WARNING - ------ Start of trial 3 / 16 ------ 
+2023-08-09 11:29:24,163 - INFO - Moving to position: (x, y) = (55.61, 40.24).
+2023-08-09 11:29:24,163 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:29:28,871 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:29:30,828 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:29:32,396 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 4 to 4.
+2023-08-09 11:29:32,574 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 4 to 4.
+2023-08-09 11:29:32,619 - INFO - Trial 3 / 16 done. Expected time remaining: 00h01m56s.
+2023-08-09 11:29:32,620 - WARNING - ------ Start of trial 4 / 16 ------ 
+2023-08-09 11:29:32,628 - INFO - Moving to position: (x, y) = (27.44, 74.06).
+2023-08-09 11:29:32,628 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:29:37,585 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:29:39,548 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:29:41,115 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 5 to 5.
+2023-08-09 11:29:41,315 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 5 to 5.
+2023-08-09 11:29:41,371 - INFO - Trial 4 / 16 done. Expected time remaining: 00h01m47s.
+2023-08-09 11:29:41,372 - WARNING - ------ Start of trial 5 / 16 ------ 
+2023-08-09 11:29:41,379 - INFO - Moving to position: (x, y) = (57.55, 34.45).
+2023-08-09 11:29:41,380 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:29:46,428 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:29:48,387 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:29:49,997 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 6 to 6.
+2023-08-09 11:29:50,210 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 6 to 6.
+2023-08-09 11:29:50,273 - INFO - Trial 5 / 16 done. Expected time remaining: 00h01m38s.
+2023-08-09 11:29:50,273 - WARNING - ------ Start of trial 6 / 16 ------ 
+2023-08-09 11:29:50,283 - INFO - Moving to position: (x, y) = (23.06, 51.5).
+2023-08-09 11:29:50,283 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:29:55,147 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:29:57,107 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:29:58,702 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 7 to 7.
+2023-08-09 11:29:58,939 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 7 to 7.
+2023-08-09 11:29:59,007 - INFO - Trial 6 / 16 done. Expected time remaining: 00h01m29s.
+2023-08-09 11:29:59,007 - WARNING - ------ Start of trial 7 / 16 ------ 
+2023-08-09 11:29:59,018 - INFO - Moving to position: (x, y) = (18.49, 49.66).
+2023-08-09 11:29:59,019 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:30:03,104 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:30:05,066 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:30:06,679 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 8 to 8.
+2023-08-09 11:30:06,987 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 8 to 8.
+2023-08-09 11:30:07,060 - INFO - Trial 7 / 16 done. Expected time remaining: 00h01m19s.
+2023-08-09 11:30:07,061 - WARNING - ------ Start of trial 8 / 16 ------ 
+2023-08-09 11:30:07,064 - INFO - Moving to position: (x, y) = (64.87, 98.35).
+2023-08-09 11:30:07,064 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:30:12,340 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:30:14,298 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:30:15,933 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 9 to 9.
+2023-08-09 11:30:16,171 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 9 to 9.
+2023-08-09 11:30:16,283 - INFO - Trial 8 / 16 done. Expected time remaining: 00h01m11s.
+2023-08-09 11:30:16,284 - WARNING - ------ Start of trial 9 / 16 ------ 
+2023-08-09 11:30:16,290 - INFO - Moving to position: (x, y) = (39.14, 38.68).
+2023-08-09 11:30:16,290 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:30:21,540 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:30:23,497 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:30:25,111 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 10 to 10.
+2023-08-09 11:30:25,390 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 10 to 10.
+2023-08-09 11:30:25,478 - INFO - Trial 9 / 16 done. Expected time remaining: 00h01m02s.
+2023-08-09 11:30:25,479 - WARNING - ------ Start of trial 10 / 16 ------ 
+2023-08-09 11:30:25,489 - INFO - Moving to position: (x, y) = (46.07, 23.24).
+2023-08-09 11:30:25,489 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:30:29,937 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:30:31,897 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:30:33,561 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 11 to 11.
+2023-08-09 11:30:33,888 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 11 to 11.
+2023-08-09 11:30:33,984 - INFO - Trial 10 / 16 done. Expected time remaining: 00h00m53s.
+2023-08-09 11:30:33,985 - WARNING - ------ Start of trial 11 / 16 ------ 
+2023-08-09 11:30:33,985 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-09 11:30:34,154 - INFO - Baseline EIT data obtained.
+2023-08-09 11:30:34,343 - INFO - Appending data in Baseline (testing/EIT_Baselines.xlsx) from rows 9 to 9.
+2023-08-09 11:30:34,503 - INFO - Moving to position: (x, y) = (64.72, 24.99).
+2023-08-09 11:30:34,503 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:30:38,999 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:30:40,960 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:30:42,628 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 12 to 12.
+2023-08-09 11:30:42,971 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 12 to 12.
+2023-08-09 11:30:43,072 - INFO - Trial 11 / 16 done. Expected time remaining: 00h00m44s.
+2023-08-09 11:30:43,072 - WARNING - ------ Start of trial 12 / 16 ------ 
+2023-08-09 11:30:43,080 - INFO - Moving to position: (x, y) = (36.08, 87.67).
+2023-08-09 11:30:43,081 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:30:48,372 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:30:50,328 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:30:52,014 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 13 to 13.
+2023-08-09 11:30:52,341 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 13 to 13.
+2023-08-09 11:30:52,452 - INFO - Trial 12 / 16 done. Expected time remaining: 00h00m36s.
+2023-08-09 11:30:52,453 - WARNING - ------ Start of trial 13 / 16 ------ 
+2023-08-09 11:30:52,464 - INFO - Moving to position: (x, y) = (62.89, 37.96).
+2023-08-09 11:30:52,464 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:30:57,599 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:30:59,559 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:31:01,254 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 14 to 14.
+2023-08-09 11:31:01,607 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 14 to 14.
+2023-08-09 11:31:01,724 - INFO - Trial 13 / 16 done. Expected time remaining: 00h00m27s.
+2023-08-09 11:31:01,724 - WARNING - ------ Start of trial 14 / 16 ------ 
+2023-08-09 11:31:01,735 - INFO - Moving to position: (x, y) = (31.54, 47.18).
+2023-08-09 11:31:01,735 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:31:06,504 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:31:08,463 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:31:10,194 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 15 to 15.
+2023-08-09 11:31:10,555 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 15 to 15.
+2023-08-09 11:31:10,714 - INFO - Trial 14 / 16 done. Expected time remaining: 00h00m18s.
+2023-08-09 11:31:10,714 - WARNING - ------ Start of trial 15 / 16 ------ 
+2023-08-09 11:31:10,718 - INFO - Moving to position: (x, y) = (25.84, 104.76).
+2023-08-09 11:31:10,719 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:31:15,884 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:31:17,846 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:31:19,574 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 16 to 16.
+2023-08-09 11:31:20,003 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 16 to 16.
+2023-08-09 11:31:20,134 - INFO - Trial 15 / 16 done. Expected time remaining: 00h00m09s.
+2023-08-09 11:31:20,135 - WARNING - ------ Start of trial 16 / 16 ------ 
+2023-08-09 11:31:20,142 - INFO - Moving to position: (x, y) = (17.87, 27.21).
+2023-08-09 11:31:20,143 - INFO - Gear(s) moving: dist 55.4 mm, up. Sending serial byte b'3'
+2023-08-09 11:31:25,559 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-09 11:31:27,518 - INFO - Gear(s) moving: dist 55.4 mm, down. Sending serial byte b'\xb3'
+2023-08-09 11:31:29,235 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 17 to 17.
+2023-08-09 11:31:29,661 - INFO - Appending data in Positions (output/EIT_Data_Gelatin_1_finger_2_dof_Set_1.xlsx) from rows 17 to 17.
+2023-08-09 11:31:29,797 - INFO - Merging file fragments into output/EIT_Data_Gelatin_1_finger_2_dof.xlsx.
+2023-08-09 11:31:30,573 - INFO - Deleting file fragments.
+2023-08-09 11:31:30,574 - INFO - Trial 16 / 16 done. Expected time remaining: 00h00m00s.
+2023-08-09 11:31:30,575 - INFO - Randomised data collection complete. 16 data points obtained.
+2023-08-09 11:31:33,622 - INFO - Closing all serial connections.

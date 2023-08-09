@@ -12133,3 +12133,31 @@
 2023-08-08 14:14:21,360 - WARNING - ------ Start of trial 271 / 300 ------ 
 2023-08-08 14:14:21,360 - INFO - Obtaining baseline EIT data. The robot will not move.
 2023-08-08 14:14:21,554 - INFO - Baseline EIT data obtained.
+2023-08-08 14:37:34,273 - INFO - Robot initial position: [-0.522775, -0.210614, 0.226343, 3.132, -0.0728303, -0.0657115]
+2023-08-08 14:37:34,281 - INFO - Robot initial joint angles: [0.21152, -1.06128, 1.28212, -4.97635, 1.57069, 4.97064]
+2023-08-08 14:37:34,282 - WARNING - ------ Start of trial 1 / 48 ------ 
+2023-08-08 14:37:34,283 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-08 14:37:34,463 - INFO - Baseline EIT data obtained.
+2023-08-08 14:37:38,423 - INFO - Appending data in Baseline from rows 326 to 326.
+2023-08-08 14:37:40,905 - INFO - Moving to position: (x0, x1, y0, y1) = (38.36, 65.79, 37.45, 45.21); d = 28.5 [mm].
+2023-08-08 14:37:45,024 - INFO - Gear(s) moving: dist 28.5 mm, down. Sending serial byte b'\x91'
+2023-08-08 14:37:48,655 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 14:38:12,769 - INFO - Appending data in Voltages from rows 1453 to 1453.
+2023-08-08 14:38:53,118 - INFO - Appending data in Positions from rows 1453 to 1453.
+2023-08-08 14:39:22,421 - INFO - Trial 1 / 48 done. Expected time remaining: 01h24m42s.
+2023-08-08 14:39:22,421 - WARNING - ------ Start of trial 2 / 48 ------ 
+2023-08-08 14:39:22,428 - INFO - Moving to position: (x0, x1, y0, y1) = (19.75, 60.12, 98.33, 67.96); d = 50.52 [mm].
+2023-08-08 14:39:25,490 - INFO - Gear(s) moving: dist 50.52 mm, down. Sending serial byte b'\xad'
+2023-08-08 14:39:29,157 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 14:39:57,584 - INFO - Appending data in Voltages from rows 1454 to 1454.
+2023-08-08 14:40:40,763 - INFO - Appending data in Positions from rows 1454 to 1454.
+2023-08-08 14:40:59,709 - INFO - Trial 2 / 48 done. Expected time remaining: 01h18m45s.
+2023-08-08 14:40:59,710 - WARNING - ------ Start of trial 3 / 48 ------ 
+2023-08-08 14:40:59,719 - INFO - Moving to position: (x0, x1, y0, y1) = (21.5, 66.37, 52.86, 46.58); d = 45.31 [mm].
+2023-08-08 14:41:03,150 - INFO - Gear(s) moving: dist 45.31 mm, down. Sending serial byte b'\xa6'
+2023-08-08 14:41:06,781 - INFO - Received EIT data (sample 1, got 1024 values).
+2023-08-08 14:41:39,840 - INFO - Appending data in Voltages from rows 1455 to 1455.
+2023-08-08 14:42:29,807 - INFO - Appending data in Positions from rows 1455 to 1455.
+2023-08-08 14:42:47,719 - INFO - Trial 3 / 48 done. Expected time remaining: 01h18m22s.
+2023-08-08 14:42:47,720 - WARNING - ------ Start of trial 4 / 48 ------ 
+2023-08-08 14:42:47,729 - INFO - Moving to position: (x0, x1, y0, y1) = (33.16, 60.12, 64.46, 46.41); d = 32.45 [mm].

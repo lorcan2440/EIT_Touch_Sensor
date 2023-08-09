@@ -46,8 +46,8 @@ def gen_fig_2():
         x0, x1, y0, y1 = pos
         dist = 0.06
         theta = 0.0
-        x_pivot = x0 - RectEIT.PIVOT_R * np.sin(theta)
-        y_pivot = y0 + RectEIT.PIVOT_R * (1 - np.cos(theta))
+        x_pivot = x0 - self.PIVOT_R * np.sin(theta)
+        y_pivot = y0 + self.PIVOT_R * (1 - np.cos(theta))
         z_curr = setup.robot.getl()[2]
         target_xyz = setup.frame_xy_to_robot_xy(x_pivot, y_pivot, z_curr)
         setup.robot.translatel(target_xyz, acc=0.1, vel=0.1)

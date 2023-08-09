@@ -1,7 +1,7 @@
 # local imports
 import kg_robot as kgr
 import waypoints as wp
-from utils import ColouredLoggingFormatter
+from utils import *
 
 # third party imports
 import numpy as np
@@ -69,13 +69,16 @@ class RectEIT:
     EIT_COMMS = {'port': 'COM9', 'baudrate': 9600}  # timeout: 5
 
     # file paths
-    _OUTPUT_FILE = 'output/EIT_Data_Gelatin_4_dof_Set_6.xlsx'
-    _OUTPUT_BASELINE = 'output/EIT_Baselines.xlsx'
-    _LOG_FILE = 'output/EIT_log.txt'
+    _OUTPUT_FILE = 'testing/EIT_Data_Gelatin_2_fingers_4_dof.xlsx'
+    _OUTPUT_BASELINE = 'testing/EIT_Baselines.xlsx'
+    _LOG_FILE = 'testing/EIT_log.txt'
     _NOTIFIER_SCRIPT = 'exp_complete_notifier.ps1'
 
+    # misc
+    TRIALS_PER_TEMP_WB = 100
+
     def __init__(self):
-        self.VOLTAGES_HEADERS = ['v' + str(i) for i in range(RectEIT.NUM_VOLTAGES)]
+        self.VOLTAGES_HEADERS = ['v' + str(i) for i in range(self.NUM_VOLTAGES)]
         self.POSITIONS_HEADERS = ['x0', 'x1', 'y0', 'y1']
         self.init_logger()
     
@@ -83,7 +86,7 @@ class RectEIT:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
         file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        file_handler = logging.FileHandler(RectEIT._LOG_FILE)
+        file_handler = logging.FileHandler(self._LOG_FILE)
         file_handler.setFormatter(file_formatter)
         stream_handler = logging.StreamHandler()
         stream_handler.setFormatter(ColouredLoggingFormatter())
@@ -101,28 +104,28 @@ class RectEIT:
         - `move` (bool, default = True): if true, move the robot to its starting position.
         - `confirm` (bool, default = True): if true, ask the user to confirm before moving the robot.
         '''   
-        self.robot = kgr.kg_robot(**RectEIT.ROBOT_COMMS)
-        self.arduino = serial.Serial(**RectEIT.ARDUINO_COMMS)
-        self.eit = serial.Serial(**RectEIT.EIT_COMMS)
+        self.robot = kgr.kg_robot(**self.ROBOT_COMMS)
+        self.arduino = serial.Serial(**self.ARDUINO_COMMS)
+        self.eit = serial.Serial(**self.EIT_COMMS)
         time.sleep(0.5)
         self.eit.reset_input_buffer()
         self.eit.reset_output_buffer()
         self.eit.flush()
         self.eit.read_all()
         time.sleep(0.5)
-        self.robot.set_tcp(RectEIT.CLAW_TCP)
+        self.robot.set_tcp(self.CLAW_TCP)
         self.logger.info(f'Robot initial position: {self.robot.getl()}')
         self.logger.info(f'Robot initial joint angles: {self.robot.getj()}')
         if move:
             if confirm:
-                print(f'The robot is about to move to the position {RectEIT.CORNER_ORIGIN}.\n'
+                print(f'The robot is about to move to the position {self.CORNER_ORIGIN}.\n'
                     'Ensure the area is clear of obstacles before continuing.')
                 ans = input('Press Enter to move. To exit the program and NOT move, type "STOP" and press Enter. ')
                 if ans.strip().upper() == 'STOP':
                     self.logger.info('The program is closing because "STOP" was entered.')
                     exit()  # abort program
             self.logger.warning('The robot is moving to its starting position.')
-            self.robot.movel(RectEIT.CORNER_ORIGIN, acc=0.01, vel=0.01)
+            self.robot.movel(self.CORNER_ORIGIN, acc=0.01, vel=0.01)
     
     def test_corner_calibration_positions(self) -> None:
         '''
@@ -131,31 +134,31 @@ class RectEIT:
         self.logger.info('Testing corner calibration positions. The robot will move to the four corners of the frame.')
         self.logger.warning('The robot is about to move to the corner near Electrode 1 (origin).')
         input('Press Enter.')
-        self.robot.translatel(RectEIT.CORNER_ORIGIN, acc=0.1, vel=0.1)
+        self.robot.translatel(self.CORNER_ORIGIN, acc=0.1, vel=0.1)
 
         self.logger.warning('The robot is about to move to the corner near Electrode 10 (y-axis limit).')
         input('Press Enter.')
-        self.robot.translatel_rel([0, RectEIT.FRAME_Y, 0], acc=0.1, vel=0.1)
+        self.robot.translatel_rel([0, self.FRAME_Y, 0], acc=0.1, vel=0.1)
 
         self.logger.warning('The robot is about to move to the corner near Electrode 26 (x-axis limit).')
         input('Press Enter.')
-        self.robot.translatel_rel([RectEIT.FRAME_X, -RectEIT.FRAME_Y, 0], acc=0.1, vel=0.1)
+        self.robot.translatel_rel([self.FRAME_X, -self.FRAME_Y, 0], acc=0.1, vel=0.1)
 
         self.logger.warning('The robot is about to move to the corner near Electrode 17 (opposite origin).')
         input('Press Enter.')
-        self.robot.translatel_rel([0, RectEIT.FRAME_Y, 0], acc=0.1, vel=0.1)
+        self.robot.translatel_rel([0, self.FRAME_Y, 0], acc=0.1, vel=0.1)
 
         self.logger.warning('The robot is about to return to the origin.')
         input('Press Enter.')
-        self.robot.translatel_rel([-RectEIT.FRAME_X, -RectEIT.FRAME_Y, 0], acc=0.1, vel=0.1)
+        self.robot.translatel_rel([-self.FRAME_X, -self.FRAME_Y, 0], acc=0.1, vel=0.1)
 
         home_after = self.robot.getl()
-        if np.allclose(home_after, RectEIT.CORNER_ORIGIN, atol=0.001):  # 1 mm deviation
+        if np.allclose(home_after, self.CORNER_ORIGIN, atol=0.001):  # 1 mm deviation
             self.logger.info('Corner calibration positions test complete. '
                 'Current position matches origin to within 1 mm.')
         else:
             self.logger.error(f'Corner calibration positions test failed. '
-                f'Expected to be at or near {RectEIT.CORNER_ORIGIN} but actually at {home_after}.')
+                f'Expected to be at or near {self.CORNER_ORIGIN} but actually at {home_after}.')
     
     def test_gear_motor(self, num_times: int = 1):
         '''
@@ -167,22 +170,22 @@ class RectEIT:
         - `num_times` (int, default = 1): number of times to open and close the claw.
         '''
         self.logger.info('Testing gear motor: close -> open -> close -> up -> down.')
-        self.move_gear(RectEIT.FINGER_MIN_SEP)
+        self.move_gear(self.FINGER_MIN_SEP)
         if num_times is None:
             while True:
                 self.test_gear_motor(num_times=1)
         for _ in range(num_times):
-            self.move_gear(RectEIT.FINGER_MAX_SEP)  # open
-            self.move_gear(RectEIT.FINGER_MIN_SEP)  # close
-            self.move_gear(RectEIT.FINGER_MIN_SEP, vertical=0)  # up
-            self.move_gear(RectEIT.FINGER_MIN_SEP, vertical=1)  # down
+            self.move_gear(self.FINGER_MAX_SEP)  # open
+            self.move_gear(self.FINGER_MIN_SEP)  # close
+            self.move_gear(self.FINGER_MIN_SEP, vertical=0)  # up
+            self.move_gear(self.FINGER_MIN_SEP, vertical=1)  # down
             time.sleep(0.5)
         self.logger.info('Motor test complete.')
     
     def move_up_if_too_low(self):
         if (tmp_z := self.robot.getl()[2]) <= 0.18:
             self.logger.warning('Robot is too low. Moving up.')
-            self.robot.translatel_rel([0, 0, (RectEIT.CORNER_ORIGIN[2] - tmp_z), 0, 0, 0], acc=0.05, vel=0.05)
+            self.robot.translatel_rel([0, 0, (self.CORNER_ORIGIN[2] - tmp_z), 0, 0, 0], acc=0.05, vel=0.05)
     
     def read_eit_voltages(self, as_array: bool = True, check_full: bool = True) -> list | np.ndarray:
         '''
@@ -229,13 +232,13 @@ class RectEIT:
         ### Raises
         - `ValueError`: if the desired separation is outside the allowable range.
         '''
-        if not RectEIT.FINGER_MIN_SEP <= dist <= RectEIT.FINGER_MAX_SEP:
+        if not self.FINGER_MIN_SEP <= dist <= self.FINGER_MAX_SEP:
             raise ValueError(f'The specified finger positions are out of the allowable range.')
         if vertical not in [0, 1]:
             raise ValueError(f'Vertical must be 0 or 1.')
         
         # data sent as a byte b'XYYYYYYY', where X is vertical and YYYYYYY is servo angle
-        servo_angle = self.gear_metres_to_servo(dist)
+        servo_angle = gear_metres_to_servo(dist)
         servo_angle_bin = bin(servo_angle)[2:].zfill(7)
         vertical_bin = bin(vertical)[2:].zfill(1)
         data_bin = vertical_bin + servo_angle_bin
@@ -254,22 +257,6 @@ class RectEIT:
         self.arduino.close()
         self.eit.close()
 
-    @staticmethod
-    def gear_metres_to_servo(dist: float) -> int:
-        '''
-        Utility to convert a desired separation between fingers to a servo setting for the claw.
-        
-        ### Arguments
-        #### Required
-        - `dist` (float): centre-to-centre separation distance of fingers, in metres.
-        #### Optional
-        
-        ### Returns
-        - `int`: angle to turn the motor, in degrees.
-        '''
-        dist_mm = dist * 1000
-        return int(math.degrees((dist_mm - 15) / 45))
-    
     @staticmethod
     def show_voltage_map(voltages: np.ndarray, baseline: np.ndarray = None):
         '''
@@ -319,8 +306,8 @@ class RectEIT:
             plt.xlabel('Reading number')
             plt.ylabel('Voltage / $ V $')
             for i, row in enumerate(voltages, start=1):
-                plt.plot(list(range(RectEIT.NUM_VOLTAGES)), row, alpha=0.5)
-            plt.plot(list(range(RectEIT.NUM_VOLTAGES)), np.mean(voltages, axis=0), color='black', label='Average')
+                plt.plot(list(range(self.NUM_VOLTAGES)), row, alpha=0.5)
+            plt.plot(list(range(self.NUM_VOLTAGES)), np.mean(voltages, axis=0), color='black', label='Average')
             plt.legend(loc='upper right')
         else:
             baseline = np.tile(baseline, (voltages.shape[0], 1))
@@ -330,24 +317,24 @@ class RectEIT:
             ax_b.set_title('Baseline voltages, $ V_0 $')
             ax_b.set_xlabel('Reading number')
             ax_b.set_ylabel('Voltage / $ V $')
-            ax_b.plot(list(range(RectEIT.NUM_VOLTAGES)), baseline[0], color='black', label='Baseline')
+            ax_b.plot(list(range(self.NUM_VOLTAGES)), baseline[0], color='black', label='Baseline')
             ax_raw.set_title('Touching voltages (raw values, $ V $)')
             ax_raw.set_xlabel('Reading number')
             ax_raw.set_ylabel('Voltage / $ V $')
             for i, row in enumerate(voltages, start=1):
-                ax_raw.plot(list(range(RectEIT.NUM_VOLTAGES)), row, label=f'Trial {i}')
+                ax_raw.plot(list(range(self.NUM_VOLTAGES)), row, label=f'Trial {i}')
             ax_raw.legend(loc='upper right')
             ax_rel.set_title('Touching voltages (relative to baseline, $ \Delta V = V - V_0 $)')
             ax_rel.set_xlabel('Reading number')
             ax_rel.set_ylabel('Relative Voltage / $ V $')
             for i, row in enumerate(voltages - baseline, start=1):
-                ax_rel.plot(list(range(RectEIT.NUM_VOLTAGES)), row, label=f'Trial {i}', alpha=0.5)
-            ax_rel.plot(list(range(RectEIT.NUM_VOLTAGES)), np.mean(voltages - baseline, axis=0), color='black', label='Average')
+                ax_rel.plot(list(range(self.NUM_VOLTAGES)), row, label=f'Trial {i}', alpha=0.5)
+            ax_rel.plot(list(range(self.NUM_VOLTAGES)), np.mean(voltages - baseline, axis=0), color='black', label='Average')
             ax_rel.legend(loc='upper right')
         plt.show()
 
     def get_baseline(self, output_file: str = None, average: bool = False,
-            num_trials: int = 10, **kwargs) -> np.ndarray:
+            num_samples: int = 10, **kwargs) -> np.ndarray:
         '''
         Collects a number of EIT readings with the fingers not touching the skin (baseline).
         If `average` is True, the results will be averaged.
@@ -357,23 +344,23 @@ class RectEIT:
         #### Optional
         - `output_file` (str, default = None): if provided, save the baseline to this file path.
         - `average` (bool, default = False): if True, average the results.
-        - `num_trials` (int, default = 10): number of readings to take (to be averaged).
+        - `num_samples` (int, default = 10): number of readings to take (to be averaged).
         
         ### Returns
         - `np.ndarray`: array of baseline voltages, in volts. Shape: (num_trials, 1024) or (1024,).
         '''
         self.logger.info('Obtaining baseline EIT data. The robot will not move.')
         dataset = []
-        for _ in range(num_trials):
+        for sample in range(num_samples):
             dataset.append(self.read_eit_voltages(**kwargs))
         self.logger.info('Baseline EIT data obtained.')
         if average:
             if output_file is not None:
-                self.save_to_excel([np.mean(dataset, axis=0)], ['Baseline'], [self.VOLTAGES_HEADERS], output_file)
+                self.save_to_excel([np.mean(dataset, axis=0)], ['Baseline'], [self.VOLTAGES_HEADERS], output_file, **kwargs)
             return np.mean(dataset, axis=0)  # shape: (1024,)
         else:
             if output_file is not None:
-                self.save_to_excel([np.array(dataset)], ['Baseline'], [self.VOLTAGES_HEADERS], output_file)
+                self.save_to_excel([np.array(dataset)], ['Baseline'], [self.VOLTAGES_HEADERS], output_file, **kwargs)
             return np.array(dataset)  # shape: (num_trials, 1024)
     
     def convert_xy_to_disp_map(self, positions: list | np.ndarray) -> np.ndarray:
@@ -392,12 +379,12 @@ class RectEIT:
         - `np.ndarray`: array of images showing the finger positions. Each array
         will be 1 if there is a press within that tile, and 0 otherwise.
         The radius of the finger is neglected.
-        Shape: (num_trials, RectEIT.GRID_DIV_X, RectEIT.GRID_DIV_Y) or
-        (RectEIT.GRID_DIV_X, RectEIT.GRID_DIV_Y) if only one.
+        Shape: (num_trials, self.GRID_DIV_X, self.GRID_DIV_Y) or
+        (self.GRID_DIV_X, self.GRID_DIV_Y) if only one.
         '''
 
-        tile_x = RectEIT.FRAME_X / RectEIT.GRID_DIV_X
-        tile_y = RectEIT.FRAME_Y / RectEIT.GRID_DIV_Y
+        tile_x = self.FRAME_X / self.GRID_DIV_X
+        tile_y = self.FRAME_Y / self.GRID_DIV_Y
 
         if isinstance(positions, list):
             positions = np.array(positions)
@@ -405,7 +392,7 @@ class RectEIT:
             positions = positions.reshape(1, -1)
         disp_maps = []
         for pos in positions:
-            disp_map = np.zeros((RectEIT.GRID_DIV_X, RectEIT.GRID_DIV_Y))
+            disp_map = np.zeros((self.GRID_DIV_X, self.GRID_DIV_Y))
             x_list = pos[::len(pos) // 2]
             y_list = pos[len(pos) // 2::]
             for x, y in zip(x_list, y_list):
@@ -421,7 +408,7 @@ class RectEIT:
         ### Arguments
         #### Required
         - `img` (np.ndarray): an pixel array where each pixel is 1 for a press and 0 if not.
-        Shape: (RectEIT.GRID_DIV_X, RectEIT.GRID_DIV_Y).
+        Shape: (self.GRID_DIV_X, self.GRID_DIV_Y).
         #### Optional
         '''        
         cMap = ListedColormap(['white', 'green'])
@@ -435,10 +422,10 @@ class RectEIT:
         cbar.ax.set_ylabel('Contact', rotation=270)
         ax.set_xlabel('x position (tile number)')
         ax.set_ylabel('y position (tile number)')
-        ax.set_xticks(np.arange(0, RectEIT.GRID_DIV_X + 1, 1))
-        ax.set_yticks(np.arange(0, RectEIT.GRID_DIV_Y + 1, 1))
-        ax.set_xlim(0, RectEIT.GRID_DIV_X)
-        ax.set_ylim(0, RectEIT.GRID_DIV_Y)
+        ax.set_xticks(np.arange(0, self.GRID_DIV_X + 1, 1))
+        ax.set_yticks(np.arange(0, self.GRID_DIV_Y + 1, 1))
+        ax.set_xlim(0, self.GRID_DIV_X)
+        ax.set_ylim(0, self.GRID_DIV_Y)
         ax.set_title('Finger position')
         ax.grid(linewidth=2, visible=True, which='major', alpha=1.0)
         ax.grid(which='minor', alpha=0.0)
@@ -448,18 +435,17 @@ class RectEIT:
         '''
         Checks whether a given position of the fingers is valid.
         
-        #### Arguments
+        ### Arguments
+        #### Required
+        - `positions` (list | np.ndarray): coordinates [x0, x1, y0, y1] (0: fixed finger, 1: moving finger), in m.
+        #### Optional
+        - `raise_error` (bool, default = True): if True, raise a ValueError if the positions are invalid.
         
-        `positions` (list | np.ndarray): coordinates [x0, x1, y0, y1] (0: fixed finger, 1: moving finger), in m.
-        `raise_error` (bool, default = True): if True, raise a ValueError if the positions are invalid.
+        ### Returns
+        - `bool`: True if the positions are valid, else False.
         
-        #### Returns
-        
-        bool: True if the positions are valid, else False.
-        
-        #### Raises
-        
-        `ValueError`: if the positions are invalid and `raise_error` is True.
+        ### Raises
+        - `ValueError`: if the positions are invalid and `raise_error` is True.
         '''
 
         positions = list(positions)
@@ -473,27 +459,27 @@ class RectEIT:
             y1 = y0 if y1 is None else y1
 
         # check if finger x is too small or too large
-        if not (RectEIT.X_MIN <= x0 <= RectEIT.X_MAX and RectEIT.X_MIN <= x1 <= RectEIT.X_MAX):
+        if not (self.X_MIN <= x0 <= self.X_MAX and self.X_MIN <= x1 <= self.X_MAX):
             if raise_error:
                 raise ValueError(f'Finger x position out of range. Got {x0}, {x1}, must be in range '
-                    f'[{RectEIT.X_MIN}, {RectEIT.X_MAX}].')
+                    f'[{self.X_MIN}, {self.X_MAX}].')
             else:
                 return False
 
         # check if finger y is too small or too large
-        if not (RectEIT.Y_MIN <= y0 <= RectEIT.Y_MAX and RectEIT.Y_MIN <= y1 <= RectEIT.Y_MAX):
+        if not (self.Y_MIN <= y0 <= self.Y_MAX and self.Y_MIN <= y1 <= self.Y_MAX):
             if raise_error:
                 raise ValueError(f'Finger y position out of range. Got {y0}, {y1}, must be in range '
-                    f'[{RectEIT.Y_MIN}, {RectEIT.Y_MAX}].')
+                    f'[{self.Y_MIN}, {self.Y_MAX}].')
             else:
                 return False
 
         # check distance between fingers
         dist = np.hypot(x0 - x1, y0 - y1)
-        if not RectEIT.FINGER_MIN_SEP <= dist <= RectEIT.FINGER_MAX_SEP and num_fingers == 2:
+        if not self.FINGER_MIN_SEP <= dist <= self.FINGER_MAX_SEP and num_fingers == 2:
             if raise_error:
                 raise ValueError(f'Fingers too close or too far apart. Got {dist}, '
-                    f'must be in range [{RectEIT.FINGER_MIN_SEP}, {RectEIT.FINGER_MAX_SEP}].')
+                    f'must be in range [{self.FINGER_MIN_SEP}, {self.FINGER_MAX_SEP}].')
             else:
                 return False
 
@@ -520,40 +506,54 @@ class RectEIT:
         `self.robot.translatel(self.frame_xy_to_robot_xy(x, y, z))`, or
         `self.robot.translatel_rel(self.frame_xy_to_robot_xy(dx, dy, dz))`
         
-        #### Arguments
+        ### Arguments
+        #### Required
+        - `x` (float): x-coordinate in frame [mm], positive directed towards Electode 26 from origin
+        - `y` (float): y-coordinate in frame [mm], positive directed towards Electode 10 from origin
+        - `_z` (float): z-coordinate in frame [mm], positive is vertically upwards
+        #### Optional
         
-        `x` (float): x-coordinate in frame [mm], positive directed towards Electode 26 from origin
-        `y` (float): y-coordinate in frame [mm], positive directed towards Electode 10 from origin
-        `_z` (float): z-coordinate in frame [mm], positive is vertically upwards
-        
-        #### Returns
-        
-        np.ndarray: array for the position pose of the robot, in metres. Shape: (6,), last three are zeros
-        '''        
-        robot_x = RectEIT.CORNER_ORIGIN[0] + x
-        robot_y = RectEIT.CORNER_ORIGIN[1] + y
+        ### Returns
+        - `np.ndarray`: array for the position pose of the robot, in metres. Shape: (6,), last three are zeros
+        '''    
+        robot_x = self.CORNER_ORIGIN[0] + x
+        robot_y = self.CORNER_ORIGIN[1] + y
         return np.array([robot_x, robot_y, _z, 0, 0, 0])
 
     def save_to_excel(self, data_list: list[np.ndarray], sheet_names_list: list[str],
-            header_row_list: list[list[str]], filename: str, warn_if_not_same_dim: bool = True):
+            header_row_list: list[list[str]], filename: str, **kwargs):
         '''
         Append data arrays to Excel sheets row-wise. If the file or a sheet does not exist,
         it will be created. Data will be appended with headers if the sheet is new.
+
+        Example usage:
+        ```
+        data1 = np.array([[1, 5, 10], [2, 4, 11]])
+        data2 = np.array([[8, 4], [10, 0.5]])
+        sheet_names = ['First', 'Second']
+        header_rows = [['Alpha', 'Beta', 'Gamma'], ['Delta', 'Epsilon']]
+        self.save_to_excel([data1, data2], sheet_names, header_rows, 'test.xlsx')
+        ```
         
-        #### Arguments
+        ### Arguments
+        #### Required
+        - `data_list` (list[np.ndarray]): a list of 2D NumPy arrays to save to each sheet, row-wise.
+        - `sheet_names_list` (list[str]): a corresponding list of sheet names to save these arrays in.
+        - `header_row_list` (list[list[str]]): a corresponding list of header rows to add to the top.
+        - `filename` (str): the output filename.
+        #### Optional
+        - `trial` (int, default = None): if provided, the function will temporarily save to smaller
+        files every `self.TRIALS_PER_TEMP_WB` trials in order to prevent slowdown with large files.
+        These temporary files will all be merged into the target output file (without overwriting) at the end.
+        - `force_same_dim` (bool, default = True): if True, raise an ValueError if the arrays
+        have mismatching numbers of rows. 
         
-        `data_list` (list[np.ndarray]): list of 2D arrays to save.
-
-        `sheet_names_list` (list[str]): corresponding list of sheet names to save these arrays in.
-
-        `header_row_list` (list[list[str]]): corresponding list of header rows to save in
-            each sheet if making for the first time. If None, do not include a header row.
-
-        `filename` (str): Excel file to save to.
-
-        `warn_if_not_same_dim` (bool, default = True): if True, warn if the arrays
-            do not all have the same first dimension.
+        ### Raises
+        - `ValueError`: if `force_same_dim` is True and any arrays have mismatching numbers of rows.
         '''
+        force_same_dim = kwargs.get('force_same_dim', True)
+        trial = kwargs.get('trial', None)
+
         if len(data_list) != len(sheet_names_list):
             raise ValueError('The number of data arrays and sheet names do not match.')
         
@@ -564,75 +564,96 @@ class RectEIT:
                 data_list[i] = data
 
         # check all arrays have same first dim if needed
-        if warn_if_not_same_dim:
+        if force_same_dim:
             if not all([data.shape[0] == data_list[0].shape[0] for data in data_list]):
-                self.logger.warning('Arrays have mismatching number of rows.')
+                raise ValueError('Arrays have mismatching number of rows. Not saving.')
         
-        if os.path.exists(filename):
+        # set the name of the workbook to save this data to
+        if trial is not None:
+            this_wb_num = math.ceil(trial / self.TRIALS_PER_TEMP_WB)
+            this_wb_name = os.path.splitext(filename)[0] + f'_Set_{this_wb_num}.xlsx'
+        else:
+            this_wb_name = filename
+
+        if os.path.exists(this_wb_name):
             # iterate through each sheet and add the data
             for i, (data, sheet_name, header_row) in enumerate(zip(data_list, sheet_names_list, header_row_list)):
                 data_df = pd.DataFrame(data, columns=header_row)
-                with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
+                with pd.ExcelWriter(this_wb_name, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
                     sheet_exists = (sheet_name in writer.sheets)
                     start_i = writer.sheets[sheet_name].max_row if sheet_exists else 1
-                    self.logger.info(f'Appending data in {sheet_name} from rows {start_i + 1} to {start_i + data.shape[0]}.')
+                    self.logger.info(f'Appending data in {sheet_name} ({this_wb_name}) from rows {start_i + 1} to {start_i + data.shape[0]}.')
                     data_df.to_excel(writer, sheet_name=sheet_name, index=False,
                         startrow=start_i, header=(not sheet_exists))
         else:
             # create new workbook
             workbook = openpyxl.Workbook()
-            workbook.save(filename)
+            workbook.save(this_wb_name)
             for sheet_name, header_row in zip(sheet_names_list, header_row_list):
                 workbook.create_sheet(title=sheet_name)
-                with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
+                with pd.ExcelWriter(this_wb_name, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
                     if header_row is not None:
                         pd.DataFrame(columns=header_row).to_excel(writer, sheet_name=sheet_name, index=False)
-            self.logger.info(f'Created new Excel file {filename}.')
+            self.logger.info(f'Created new Excel file {this_wb_name}.')
             # add data
-            _args = [data_list, sheet_names_list, header_row_list, filename]
-            self.save_to_excel(*_args, warn_if_not_same_dim=warn_if_not_same_dim)
-
+            _args = [data_list, sheet_names_list, header_row_list, this_wb_name]
+            kwargs.pop('trial', None)
+            self.save_to_excel(*_args, **kwargs)
+        
+        if trial is not None and trial == self.num_expts_to_do:
+            # this is the last one
+            # merge all generated sheets into the main output file
+            self.logger.info(f'Merging file fragments into {filename}.')
+            from utils import merge_excel_files
+            search_str = os.path.splitext(os.path.basename(filename))[0] + '_Set_'
+            files_dir = os.path.dirname(filename)
+            files_to_merge = [os.path.join(files_dir, f) for f in os.listdir(files_dir) \
+                if os.path.basename(f).startswith(search_str)]
+            merge_excel_files(files_to_merge, filename)
+            # delete the temporary files
+            self.logger.info(f'Deleting file fragments.')
+            for f in files_to_merge:
+                os.remove(f)
+            
     def get_voltages_at_rect_pos(self, x0: float, x1: float, y0: float, y1: float, 
-            num_trials: int = 10, baseline: np.ndarray = None,
-            append_to_dataset: bool = True, average: bool = True, **kwargs) -> tuple[np.ndarray, np.ndarray]:
+            num_samples: int = 10, baseline: np.ndarray = None,
+            append_to_dataset: bool = True, average: bool = True,
+            **kwargs) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         '''
-        Conduct EIT experiments at a given position. Save and return the results.
-        If (x0, y0) or (x1, y1) are None, only one finger will be used.
+        Conduct EIT experiments at a given position in frame coordinates.
+        Save and return the results. If (x0, y0) or (x1, y1) are None, only one finger will be used.
         
-        #### Arguments
+        ### Arguments
+        #### Required
+        - `x0` (float): x coordinate of the fixed (vertically moving) finger, in metres
+        - `x1` (float): x coordinate of the moving (horizontally moving) finger, in metres
+        - `y0` (float): y coordinate of the fixed (vertically moving) finger, in metres
+        - `y1` (float): y coordinate of the moving (horizontally moving) finger, in metres
+        #### Optional
+        - `num_samples` (int, default = 10): number of times to repeat the experiment at this position
+        - `baseline` (np.ndarray, default = None): if provided, additionally calculates
+        the voltages relative to this baseline
+        - `append_to_dataset` (bool, default = True): if True, add the data to `self._OUTPUT_FILE`.
+        - `average` (bool, default = True): if True, average the results of each trial.
         
-        `x0` (float): x coordinate of the fixed finger, in metres
-        `x1` (float): x coordinate of the moving finger, in metres
-        `y0` (float): y coordinate of the fixed finger, in metres
-        `y1` (float): y coordinate of the moving finger, in metres
-        `num_trials` (int, default = 10): number of times to repeat the experiment at this position
-        `baseline` (np.ndarray, default = None): array of baselines, in volts. Shape: (1024,)
-        `append_to_dataset` (bool, default = True): if true, update the Excel file with the new data
-        `average` (bool, default = True): if True and multiple trials are requested, average the results.
-        `vel` (list, default = [0.05, 0.05, 0.2]): planar, vertical and rotational movement velocities, in m/s.
-        `acc` (list, default = [0.05, 0.05, 0.2]): planar, vertical and rotational movement accelerations, in m/s^2.
-        `_warning_count` (int, default = 0): an internal counter used to track coordinate swaps of the fingers.
-
-        #### Returns
+        ### Returns
+        - `tuple[np.ndarray, np.ndarray, np.ndarray]`: the positions (x0, x1, y0, y1), absolute voltages,
+        and relative voltages, respectively, all as 2D arrays (even if averaged). Relative voltages
+        will be None if `baseline` is not provided.
         
-        tuple[np.ndarray, np.ndarray, np.ndarray]: 
-        2D positions, absolute voltages, relative voltages arrays, in metres and volts respectively.
-        '''
-
+        ### Raises
+        - `ValueError`: if the position given is invalid. Note that the function will attempt to correct
+        the positions once by switching the order, but if this also fails, then this error will be raised.
+        '''        
         # set default movement kwargs - planar, vertical, rotational
+        trial = kwargs.get('trial', None)
         vel = kwargs.get('vel', [0.1, 0.1, 1.0])
         acc = kwargs.get('acc', [0.1, 0.1, 1.0])
         _warning_count = kwargs.get('_warning_count', 0)
 
         # check positions are possible
         try:
-            num_fingers = 2
-            if [x0, x1, y0, y1].count(None) == 2:
-                num_fingers = 1
-                x1 = x0 if x1 is None else x1
-                y1 = y0 if y1 is None else y1
-                x0 = x1 if x0 is None else x0
-                y0 = y1 if y0 is None else y0
+            num_fingers = 1 if [x0, x1, y0, y1].count(None) == 2 else 2
             positions = np.array([x0, x1, y0, y1])
             self.validate_positions(positions)
         except ValueError:
@@ -640,26 +661,27 @@ class RectEIT:
                 self.logger.error('Both orders failed to produce a valid position. Aborting.')
                 raise ValueError('Both orders failed to produce a valid position. Aborting.')
             self.logger.warning('Position is invalid. Trying again with swapped order of fingers.')
-            return self.get_voltages_at_rect_pos(x1, x0, y1, y0, num_trials=num_trials, baseline=baseline, 
+            return self.get_voltages_at_rect_pos(x1, x0, y1, y0, num_samples=num_samples, baseline=baseline, 
                 append_to_dataset=append_to_dataset, average=average,
                 **(kwargs | {'_warning_count': _warning_count + 1}))
 
         # calculate (r, theta)
-        dist = np.hypot(x0 - x1, y0 - y1)  # distance between fingers
-        theta = np.arctan2(x0 - x1, y0 - y1)  # clockwise from positive y-axis
+        if num_fingers == 2:
+            dist = np.hypot(x0 - x1, y0 - y1)  # distance between fingers
+            theta = np.arctan2(x0 - x1, y0 - y1)  # clockwise from positive y-axis
         
         # check if robot is too low - if so, move up
         if (tmp_z := self.robot.getl()[2]) <= 0.18:
             self.logger.warning('Robot is too low. Moving up.')
-            self.robot.translatel_rel([0, 0, (RectEIT.CORNER_ORIGIN[2] - tmp_z), 0, 0, 0], acc=acc[1], vel=vel[1])
+            self.robot.translatel_rel([0, 0, (self.CORNER_ORIGIN[2] - tmp_z), 0, 0, 0], acc=acc[1], vel=vel[1])
         
         # move to position
         if num_fingers == 2:
             self.logger.info(f'Moving to position: '
                 f'(x0, x1, y0, y1) = ({round(1000 * x0, 2)}, {round(1000 * x1, 2)}, '
                 f'{round(1000 * y0, 2)}, {round(1000 * y1, 2)}); d = {round(1000 * dist, 2)} [mm].')
-            x_pivot = x0 - RectEIT.PIVOT_R * np.sin(theta)
-            y_pivot = y0 + RectEIT.PIVOT_R * (1 - np.cos(theta))
+            x_pivot = x0 - self.PIVOT_R * np.sin(theta)
+            y_pivot = y0 + self.PIVOT_R * (1 - np.cos(theta))
             z_curr = self.robot.getl()[2]
             target_xyz = self.frame_xy_to_robot_xy(x_pivot, y_pivot, z_curr)
             self.robot.translatel(target_xyz, acc=acc[0], vel=vel[0])
@@ -670,29 +692,27 @@ class RectEIT:
             self.move_gear(dist)
         elif num_fingers == 1:
             self.logger.info(f'Moving to position: '
-                f'(x, y) = ({round(1000 * x0, 2)}, {round(1000 * y0, 2)}).')
-            self.move_gear(RectEIT.PIVOT_R, vertical=0)
+                f'(x, y) = ({round(1000 * x1, 2)}, {round(1000 * y1, 2)}).')
+            self.move_gear(self.PIVOT_R, vertical=0)
             z_curr = self.robot.getl()[2]
-            target_xyz = self.frame_xy_to_robot_xy(x0, y0, z_curr)
+            target_xyz = self.frame_xy_to_robot_xy(x1, y1 + self.PIVOT_R, z_curr)
             self.robot.translatel(target_xyz, acc=acc[0], vel=vel[0])
     
         # get touching voltages
         touching_voltages = []
-        for trial in range(num_trials):
+        for sample in range(1, num_samples + 1):
             # move down
-            self.robot.translatel_rel([0, 0, -1 * RectEIT.PRESS_DEPTH, 0, 0, 0], acc=acc[1], vel=vel[1])
+            self.robot.translatel_rel([0, 0, -1 * self.PRESS_DEPTH, 0, 0, 0], acc=acc[1], vel=vel[1])
             # take readings
             data = self.read_eit_voltages()
             touching_voltages.append(data)
-            self.logger.info(f'Received EIT data (sample {trial + 1}, got {len(data)} values).')
+            self.logger.info(f'Received EIT data (sample {sample}, got {len(data)} values).')
             # move up
-            self.robot.translatel_rel([0, 0, RectEIT.PRESS_DEPTH, 0, 0, 0], acc=acc[1], vel=vel[1])
+            self.robot.translatel_rel([0, 0, self.PRESS_DEPTH, 0, 0, 0], acc=acc[1], vel=vel[1])
         
-        # undo rotations
+        # undo rotations (don't undo finger/gear movements)
         if num_fingers == 2:
             self.robot.movej(start_joints, acc=acc[2], vel=vel[2])
-        else:
-            self.move_gear(RectEIT.PIVOT_R)
         
         # process data
         touching_voltages = np.array(touching_voltages)  # shape: (num_trials, -1)
@@ -700,216 +720,90 @@ class RectEIT:
             touching_voltages = np.mean(touching_voltages, axis=0).reshape(1, -1)
             positions = positions.reshape(1, -1)
         else:
-            positions = np.tile(positions, (num_trials, 1))
+            positions = np.tile(positions, (num_samples, 1))
         if baseline is not None:
-            baseline = np.tile(baseline, (num_trials, 1))
+            baseline = np.tile(baseline, (num_samples, 1))
             rel_voltages = touching_voltages - baseline
         else:
             rel_voltages = None
         if append_to_dataset:
             self.save_to_excel([rel_voltages, positions], ['Voltages', 'Positions'],
-                [self.VOLTAGES_HEADERS, self.POSITIONS_HEADERS], RectEIT._OUTPUT_FILE)
+                [self.VOLTAGES_HEADERS, self.POSITIONS_HEADERS], self._OUTPUT_FILE, trial=trial)
 
         return positions, touching_voltages, rel_voltages
-
-    @staticmethod
-    def open_excel_book():
+    
+    def get_random_pos(self, num_fingers: int = 2) -> np.ndarray:
         '''
-        Opens the Excel workbook specified by `RectEIT._OUTPUT_FILE`.
-        Used as a callback by the notifier after completed experiments.
+        Generate a random valid position of the fingers.
+
+        ### Arguments
+        #### Required
+        #### Optional
+        - `num_fingers` (int, default = 2): whether to get a position with 1 or 2 fingers
+
+        ### Returns
+        - `np.ndarray`: random valid [x0, x1, y0, y1] in frame coordinates.
+        If `num_fingers` is 1, the values for x0 and y0 will be None.
         '''        
-        os.startfile(RectEIT._OUTPUT_FILE)
-    
-
-    @staticmethod
-    def seconds_to_hms(seconds: float) -> str:
-        '''
-        Utility to convert a number of seconds to a string in the format 'HHhMMmSSs'.
-        Used to report the time taken by the EIT experiments.
-        
-        #### Arguments
-        
-        `seconds` (float): number of seconds.
-        
-        #### Returns
-        
-        str: string in the format HH h MM m SS.sss s.
-        '''
-        result = dt.datetime.strptime(
-            str(dt.timedelta(seconds=round(seconds))), '%H:%M:%S').strftime('%Hh%Mm%Ss')
-        return result
-
-    def send_notification_alarm(self, title: str, message: str, callback_filename: str):
-        '''
-        Sends a Windows desktop notification (alarm) with a clickable callback to open a file.
-        Uses `exp_complete_notifier.ps1` [RectEIT._NOTIFIER_SCRIPT] PowerShell script.
-        
-        #### Arguments
-        
-        `title` (str): notification title text.
-        `message` (str): notification body text.
-        `callback_filename` (str): file path to open when clicked, relative to cwd.
-        '''
-        with open(RectEIT._LOG_FILE, 'a') as f:
-            try:
-                command = f'powershell.exe -ExecutionPolicy Bypass -File {RectEIT._NOTIFIER_SCRIPT} ' + \
-                    f'"{title}" "{message}" "{callback_filename}"'
-                subprocess.check_call(command, shell=True, stderr=f, stdout=f)
-            except subprocess.CalledProcessError as e:
-                self.logger.warning(f'Failed to send notification. Error: {e.returncode} - {e}')
-    
-    def get_random_pos(self) -> np.ndarray:
-        '''
-        Returns a randomly generated valid (x0, x1, y0, y1) point in the frame coordinates.
-        '''
         x0, x1, y0, y1 = 0, 0, 0, 0
-        # generate random coords and validate until valid
+        # generate random coords and check until valid
         while not self.validate_positions([x0, x1, y0, y1], raise_error=False):
-            x0 = np.random.uniform(RectEIT.X_MIN, RectEIT.X_MAX)
-            y0 = np.random.uniform(RectEIT.Y_MIN, RectEIT.Y_MAX)
-            x1 = np.random.uniform(RectEIT.X_MIN, RectEIT.X_MAX)
-            y1 = np.random.uniform(RectEIT.Y_MIN, RectEIT.Y_MAX)
-            r = np.hypot(x0 - x1, y0 - y1)
-            theta = np.arctan2(x0 - x1, y0 - y1)
+            x0 = np.random.uniform(self.X_MIN, self.X_MAX) if num_fingers == 2 else None
+            y0 = np.random.uniform(self.Y_MIN, self.Y_MAX) if num_fingers == 2 else None
+            x1 = np.random.uniform(self.X_MIN, self.X_MAX)
+            y1 = np.random.uniform(self.Y_MIN, self.Y_MAX)
+            r = np.hypot(x0 - x1, y0 - y1) if num_fingers == 2 else None
+            theta = np.arctan2(x0 - x1, y0 - y1) if num_fingers == 2 else None
             #self.logger.info(f'(x0, y0) = ({round(x0, 4)}, {round(y0, 4)}), (x1, y1) = ({round(x1, 4)}, {round(y1, 4)}), (r, theta) = ({round(r, 4)}, {round(theta, 4)})')
         return np.array([x0, x1, y0, y1])
 
-    def get_randomised_data(self, num_datapoints: int = 100, append_to_dataset: bool = True,
-            show_each: bool = False, baseline: bool = False, take_baseline_every: int = 10):
+    def get_randomised_data(self, num_trials: int = 100, append_to_dataset: bool = True,
+            show_each: bool = False, baseline: bool = False, take_baseline_every: int = 10,
+            num_fingers: int = 2):
         '''
         Conduct several EIT experiments at randomised positions. Save (but do not return) the results.
         In each experiment, only one sample will be collected.
         
-        #### Arguments
-        
-        `num_datapoints` (int, default = 100): number of data points to collect
-        `append_to_dataset` (bool, default = True): if true, update the Excel file with the new data
-        `show_each` (bool, default = False): if true, show the voltage graph after each experiment
-        `baseline` (bool, default = False): if true, take a baseline before every trial
-        `take_baseline_every` (int, default = 10): if `baseline` is true, take a baseline every `take_baseline_every` trials
+        ### Arguments
+        #### Required
+        #### Optional
+        - `num_trials` (int, default = 100): number of data points to collect
+        - `append_to_dataset` (bool, default = True): if true, update the Excel file with the new data
+        - `show_each` (bool, default = False): if true, show the voltage graph after each experiment
+        - `baseline` (bool, default = False): if true, take a baseline before every trial
+        - `take_baseline_every` (int, default = 10): if `baseline` is true, take a baseline every
+        `take_baseline_every` trials
+        - `num_fingers` (int, default = 2): whether to use 1 or 2 fingers in the experiments
         '''
 
+        # start a counter to keep track of how many have been done
+        self.num_expts_to_do = num_trials
+
         times_per_trial = []
-        for trial in range(num_datapoints):
-
-            self.logger.warning(f'------ Start of trial {trial + 1} / {num_datapoints} ------ ')
+        for trial in range(1, num_trials + 1):
+            self.logger.warning(f'------ Start of trial {trial} / {num_trials} ------ ')
             time_start = time.time()
-
             # get baseline
-            if baseline and trial % take_baseline_every == 0:
-                baseline_data = self.get_baseline(output_file=RectEIT._OUTPUT_BASELINE, num_trials=1).reshape((-1,))
-
+            if baseline and (trial - 1) % take_baseline_every == 0:
+                baseline_data = self.get_baseline(output_file=self._OUTPUT_BASELINE, num_samples=1).reshape((-1,))
             # get a random position
-            x0, x1, y0, y1 = self.get_random_pos()
-
-            # conduct one experiment
+            x0, x1, y0, y1 = self.get_random_pos(num_fingers=num_fingers)
+            # conduct one experiment and save
             position, abs_voltage, rel_voltage = self.get_voltages_at_rect_pos(
-                x0, x1, y0, y1, num_trials=1, baseline=baseline_data, append_to_dataset=append_to_dataset)
-
+                x0, x1, y0, y1, num_samples=1, baseline=baseline_data, append_to_dataset=append_to_dataset, trial=trial)
             # calculate expected time to finish all trials
             time_end = time.time()
             times_per_trial.append(time_end - time_start)
-            time_remaining = round(np.mean(times_per_trial) * (num_datapoints - trial - 1), 2)
-            time_remaining = self.seconds_to_hms(time_remaining)
-            self.logger.info(f'Trial {trial + 1} / {num_datapoints} done. '
+            time_remaining = round(np.mean(times_per_trial) * (num_trials - trial), 2)
+            time_remaining = seconds_to_hms(time_remaining)
+            self.logger.info(f'Trial {trial} / {num_trials} done. '
                              f'Expected time remaining: {time_remaining}.')
             if show_each:
                 self.show_voltage_graph(abs_voltage, baseline=baseline_data)
         
         # notify that experiment is complete
-        total_time_taken = self.seconds_to_hms(sum(times_per_trial))
-        self.logger.info(f'Randomised data collection complete. {num_datapoints} data points obtained.')
-        self.send_notification_alarm('EIT Experiment Completed!',
-            f'{num_datapoints} points added in {total_time_taken}. Click to open the Excel workbook.',
-            RectEIT._OUTPUT_FILE)
-
-    def touch_prediction(self, x0: float, x1: float, y0: float, y1: float, model,
-            num_trials: int = 1, show_results: bool = True) -> tuple[np.ndarray, np.ndarray]:
-        '''
-        Conducts an EIT experiment at a single fixed position and makes a prediction given only
-        the EIT voltage data. Can compare the true positions to the predicted positions.
-        
-        #### Arguments
-        
-        `x0` (float): x coordinate of the fixed finger, in metres
-        `x1` (float): x coordinate of the moving finger, in metres
-        `y0` (float): y coordinate of the fixed finger, in metres
-        `y1` (float): y coordinate of the moving finger, in metres
-        `model` (_type_): a trained model that can make predictions given EIT data.
-        Must have a `predict` method. Must take in a 2D array of shape (1, 1024)
-        and output a 2D array of shape (1, 1024) and output an array of shape (1, 3).
-        `num_trials` (int, default = 1): number of times to repeat the experiment at this position.
-        A new prediction will be made each time.
-        `show_results` (bool, default = True): if true, show a scatter plot of each finger's
-        true and predicted positions.
-        
-        #### Returns
-        
-        tuple[np.ndarray, np.ndarray]: true positions and predicted positions, in metres.
-        True position has shape (1, 4) in format (x0, x1, y0, y1).
-        Predicted position has shape (num_trials, 4) in format (x0, x1, y0, y1).
-        '''    
-
-        # get baseline EIT
-        baseline = self.read_eit_voltages()
-        self.logger.info('Baseline EIT data obtained.')
-        
-        # format: (x0, x1, y0, y1), 1D array
-        pos_test = np.array([x0, x1, y0, y1])
-        self.move_to_rect_pos(*pos_test)
-
-
-        pos_pred = []
-        for trial in range(num_trials):
-            # move robot down into skin
-            self.move_finger_vertically('down')
-            # take EIT measurements
-            data = self.read_eit_voltages()
-            data -= baseline
-            print(data)
-            data = pd.DataFrame(data.reshape(1, -1), columns=self.VOLTAGES_HEADERS)
-            # move robot up out of skin
-            self.move_finger_vertically('up')
-            # make prediction for position
-            pos_pred.append(model.predict(data).reshape((-1,)))
-            print(pos_pred[-1])
-            self.logger.info(f'Made prediction ({trial + 1} / {num_trials})')
-        
-        # format: (x0, x1, y0, y1), 2D array
-        pos_pred = np.array(pos_pred)
-        pos_pred = np.concatenate((pos_pred, pos_pred[:, -1:]), axis=1)  # 3 dims -> 4 dims
-
-        if show_results:
-            mean_pos = np.mean(pos_pred, axis=0)
-            std_dev_pos = np.std(pos_pred, axis=0)
-            mean_dist = (np.mean(np.hypot(pos_test[0] - pos_pred[:, 0], pos_test[2] - pos_pred[:, 2])),
-                         np.mean(np.hypot(pos_test[1] - pos_pred[:, 1], pos_test[3] - pos_pred[:, 3])))
-            std_dev_dist = (np.std(np.hypot(pos_test[0] - pos_pred[:, 0], pos_test[2] - pos_pred[:, 2])),
-                            np.std(np.hypot(pos_test[1] - pos_pred[:, 1], pos_test[3] - pos_pred[:, 3])))
-
-            print(f'-- Fixed Finger -- true position: ({pos_test[0]}, {pos_test[2]}) -- all positions in metres')
-            print(f'Mean position: ({round(mean_pos[0], 5)}, {round(mean_pos[2], 5)})')
-            print(f'Standard deviation of position: ({round(std_dev_pos[0], 5)}, {round(std_dev_pos[2], 5)})')
-            print(f'Mean distance from true position: {round(mean_dist[0], 5)}')
-            print(f'Standard deviation of distance from true position: {round(std_dev_dist[0], 5)}')
-            print(f'-- Moving Finger -- true position: ({pos_test[1]}, {pos_test[3]}) -- all positions in metres')
-            print(f'Mean position: ({round(mean_pos[1], 5)}, {round(mean_pos[3], 5)})')
-            print(f'Standard deviation of position: ({round(std_dev_pos[1], 5)}, {round(std_dev_pos[3], 5)})')
-            print(f'Mean distance from true position: {round(mean_dist[1], 5)}')
-            print(f'Standard deviation of distance from true position: {round(std_dev_dist[1], 5)}')
-
-            plt.title('EIT Predicted Positions')
-            plt.xlabel('x position [m]')
-            plt.ylabel('y position [m]')
-            plt.plot(pos_test[0], pos_test[2], 'bo', label=f'Fixed: True ({pos_test[0]}, {pos_test[2]}) m')
-            plt.plot(pos_test[1], pos_test[3], 'go', label=f'Moving: True ({pos_test[1]}, {pos_test[3]}) m')
-            plt.plot(pos_pred[:, 0], pos_pred[:, 2], 'bx', label=f'Fixed: Predicted (' + \
-                r'$\overline{|\mathbf{x}_{true} - \mathbf{x}_{pred}|} = $' + f'{mean_dist[0]:.5f} m)')
-            plt.plot(pos_pred[:, 1], pos_pred[:, 3], 'gx', label=f'Moving: Predicted (' + \
-                r'$\overline{|\mathbf{x}_{true} - \mathbf{x}_{pred}|} = $' + f'{mean_dist[1]:.5f} m)')
-            plt.plot([0, RectEIT.FRAME_X, RectEIT.FRAME_X, 0, 0], [0, 0, RectEIT.FRAME_Y, RectEIT.FRAME_Y, 0], 'k--')
-            plt.axis('equal')
-            plt.legend(loc='upper right')
-            plt.show()
-        
-        return pos_test, pos_pred
+        total_time_taken = seconds_to_hms(sum(times_per_trial))
+        self.logger.info(f'Randomised data collection complete. {num_trials} data points obtained.')
+        send_notification_alarm('EIT Experiment Completed!',
+            f'{num_trials} points added in {total_time_taken}. Click to open the Excel workbook.',
+            self._OUTPUT_FILE, self._NOTIFIER_SCRIPT, self.logger)
