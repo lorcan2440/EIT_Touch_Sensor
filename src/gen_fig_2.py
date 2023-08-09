@@ -81,17 +81,14 @@ def measure_amplitude(setup: RectEIT, pos: list, depth: float, baseline: np.ndar
         target_xyz = setup.frame_xy_to_robot_xy(x1, y1 + setup.PIVOT_R, setup.CORNER_ORIGIN[2])
         setup.robot.translatel(target_xyz, acc=acc[0], vel=vel[0])
 
-    # collect data
+    # collect data - use a separate thread to collect data while moving
     times_list = []
     data_list = []
     t_start = time.time()
     collector_thread = threading.Thread(target=read_eit_voltages,
         args=(times_list, data_list, setup, t_start, baseline, electrodes))
-    moving_thread = threading.Thread(target=move_robot, args=(setup, depth))
-    moving_thread.start()
-    collector_thread.daemon = True
     collector_thread.start()
-    moving_thread.join()
+    move_robot(setup, depth)
     collector_thread.join()
     stop_event.clear()
 
