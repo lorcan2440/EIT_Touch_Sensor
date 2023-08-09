@@ -120,7 +120,53 @@ def merge_excel_files(filenames: list[str], output_filename: str):
                 print(f'Rows: {len(df)}, Start: {start_i}, Sheet: {sheet_name}, Source: {filename}, Dest: {output_filename}')
 
 
-if __name__ == '__main__':
-    merge_excel_files(
-        ['testing/Data_Test_Set_1.xlsx', 'testing/Data_Test_Set_2.xlsx'],
-        'testing/Data_Test.xlsx')
+def reading_num_to_electrodes(
+        index: int, as_str: bool = False) -> tuple[int, int, int, int, bool] | str:
+    '''
+    Converts a given index of the voltage output to a tuple of
+    the electrode numbers being used to take the measurement.
+    
+    ### Arguments
+    #### Required
+    - `index` (int): index of the voltage output, between 0 and 1023 inclusive.
+    #### Optional
+    - `as_str` (bool, default = False): if True, show a readable string of the electrodes.
+    
+    ### Returns
+    - `tuple[int, int, int, int, bool] | str`: (i_src, i_sink, v_pos, v_neg, is_zero).
+    '''    
+    assert 0 <= index <= 1023
+    
+    i_src = int(index // 32) + 1
+    i_sink = (i_src + 1) % 32
+    v_pos = index % 32 + 1
+    v_neg = (v_pos + 1) % 32
+
+    # the readings will be zero if (v_pos, v_neg) overlap with (src_pin, sink_pin)
+    if v_pos == i_src or v_pos == i_sink or v_neg == i_src or v_neg == i_sink:
+        is_zero = True
+    else:
+        is_zero = False
+
+    if as_str:
+        return f'I_in: {i_src}, I_out: {i_sink}, V+: {v_pos}, V-: {v_neg}, Is zeroes: {is_zero}'
+    else:
+        return i_src, i_sink, v_pos, v_neg, is_zero
+
+
+def electrodes_to_reading_num(current_source: int, v_pos: int) -> int:
+    '''
+    Convert a desired electrode combination to the index of the voltage output.
+    
+    ### Arguments
+    #### Required
+    - `current_source` (int): electrode number to input current at. 1 to 32 inclusive.
+    - `v_pos` (int): electrode number to take as positive voltage. 1 to 32 inclusive.
+    #### Optional
+    
+    ### Returns
+    - `int`: index of corresponding voltage output, between 0 and 1023 inclusive.
+    '''
+    assert 1 <= current_source <= 32
+    assert 1 <= v_pos <= 32
+    return (current_source - 1) * 32 + (v_pos - 1)

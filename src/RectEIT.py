@@ -46,7 +46,7 @@ class RectEIT:
     FINGER_MAX_SEP = 85 * 0.001  # m
     FINGER_MIN_SEP = 15 * 0.001  # m
     FINGER_RADIUS = 2 * 0.001  # m
-    PRESS_DEPTH = 95 * 0.001  # 85 mm
+    PRESS_DEPTH = 95 * 0.001  # 95 mm
     CORNER_ORIGIN = np.array(wp.home)  # fixed finger 4 cm above skin at corner near electrode 1, other finger parallel to 
     CLAW_TCP = wp.claw_tcp  # tip of fixed finger relative end effector
     PIVOT_R = abs(CLAW_TCP[0])  # 0.055398 m: distance between centre of end effector and fixed finger
@@ -125,6 +125,7 @@ class RectEIT:
                     self.logger.info('The program is closing because "STOP" was entered.')
                     exit()  # abort program
             self.logger.warning('The robot is moving to its starting position.')
+            self.move_up_if_too_low()
             self.robot.movel(self.CORNER_ORIGIN, acc=0.01, vel=0.01)
     
     def test_corner_calibration_positions(self) -> None:
@@ -400,8 +401,7 @@ class RectEIT:
             disp_maps.append(disp_map)
         return np.array(disp_maps) if len(disp_maps) > 1 else disp_maps[0]
 
-    @staticmethod
-    def show_disp_map(img: np.ndarray) -> None:
+    def show_disp_map(self, img: np.ndarray) -> None:
         '''
         Show an illustration of the finger positions as an array of pixels.
         
@@ -671,10 +671,8 @@ class RectEIT:
             theta = np.arctan2(x0 - x1, y0 - y1)  # clockwise from positive y-axis
         
         # check if robot is too low - if so, move up
-        if (tmp_z := self.robot.getl()[2]) <= 0.18:
-            self.logger.warning('Robot is too low. Moving up.')
-            self.robot.translatel_rel([0, 0, (self.CORNER_ORIGIN[2] - tmp_z), 0, 0, 0], acc=acc[1], vel=vel[1])
-        
+        self.move_up_if_too_low()
+
         # move to position
         if num_fingers == 2:
             self.logger.info(f'Moving to position: '
@@ -682,8 +680,7 @@ class RectEIT:
                 f'{round(1000 * y0, 2)}, {round(1000 * y1, 2)}); d = {round(1000 * dist, 2)} [mm].')
             x_pivot = x0 - self.PIVOT_R * np.sin(theta)
             y_pivot = y0 + self.PIVOT_R * (1 - np.cos(theta))
-            z_curr = self.robot.getl()[2]
-            target_xyz = self.frame_xy_to_robot_xy(x_pivot, y_pivot, z_curr)
+            target_xyz = self.frame_xy_to_robot_xy(x_pivot, y_pivot, self.CORNER_ORIGIN[2])
             self.robot.translatel(target_xyz, acc=acc[0], vel=vel[0])
             # rotate to position
             start_joints = self.robot.getj()
@@ -694,8 +691,7 @@ class RectEIT:
             self.logger.info(f'Moving to position: '
                 f'(x, y) = ({round(1000 * x1, 2)}, {round(1000 * y1, 2)}).')
             self.move_gear(self.PIVOT_R, vertical=0)
-            z_curr = self.robot.getl()[2]
-            target_xyz = self.frame_xy_to_robot_xy(x1, y1 + self.PIVOT_R, z_curr)
+            target_xyz = self.frame_xy_to_robot_xy(x1, y1 + self.PIVOT_R, self.CORNER_ORIGIN[2])
             self.robot.translatel(target_xyz, acc=acc[0], vel=vel[0])
     
         # get touching voltages
@@ -792,8 +788,7 @@ class RectEIT:
             position, abs_voltage, rel_voltage = self.get_voltages_at_rect_pos(
                 x0, x1, y0, y1, num_samples=1, baseline=baseline_data, append_to_dataset=append_to_dataset, trial=trial)
             # calculate expected time to finish all trials
-            time_end = time.time()
-            times_per_trial.append(time_end - time_start)
+            times_per_trial.append(time.time() - time_start)
             time_remaining = round(np.mean(times_per_trial) * (num_trials - trial), 2)
             time_remaining = seconds_to_hms(time_remaining)
             self.logger.info(f'Trial {trial} / {num_trials} done. '
