@@ -10,25 +10,55 @@ from matplotlib.font_manager import FontProperties
 import time
 import threading
 
-stop_event = threading.Event()
+stop_reading = threading.Event()
 
 def read_eit_voltages(times_list: list, data_list: list, setup: RectEIT,
-                      t_start: float, baseline: np.ndarray, electrodes: list[int]) -> np.ndarray:
-    while not stop_event.is_set():
+                      t_start: float, baseline: np.ndarray, electrodes: list[int]):
+    '''
+    Continuously read EIT voltages from a chosen set of electrodes.
+    
+    ### Arguments
+    #### Required
+    - `times_list` (list): list to append times of readings to.
+    - `data_list` (list): list to append corresponding readings to.
+    - `setup` (RectEIT): setup object to use.
+    - `t_start` (float): start time of the thread to calculate time elapsed.
+    - `baseline` (np.ndarray): a set of baseline voltages to subtract from.
+    - `electrodes` (list[int]): the indices of the measurements to store.
+    #### Optional
+    '''    
+    while not stop_reading.is_set():
         time_elapsed = time.time() - t_start
         relevant_voltages = (setup.read_eit_voltages() - baseline)[list(electrodes)]
         times_list.append(time_elapsed)
         data_list.append(relevant_voltages)
 
-def move_robot(setup: RectEIT, depth: float):
+def move_robot(setup: RectEIT, depth: float) -> tuple[float, float]:
+    '''
+    Moves the robot to the surface, into the surface, and back out again.
+    
+    ### Arguments
+    #### Required
+    - `setup` (RectEIT): setup object to use.
+    - `depth` (float): depth in metres to press down into the skin.
+    #### Optional
+    
+    ### Returns
+    - `tuple[float, float]`: the time interval within which the robot is pressing down,
+    counting since the thread was started.
+    '''    
+    t_0 = time.time()
     setup.robot.translatel_rel([0, 0, -0.082, 0, 0, 0], acc=0.05, vel=0.05)
     time.sleep(5)
+    t_start = time.time() - t_0
     setup.robot.translatel_rel([0, 0, -1 * depth, 0, 0, 0], acc=0.05, vel=0.05)
     time.sleep(5)
+    t_end = time.time() - t_0
     setup.robot.translatel_rel([0, 0, depth, 0, 0, 0], acc=0.05, vel=0.05)
     time.sleep(1)
     setup.robot.translatel_rel([0, 0, 0.082, 0, 0, 0], acc=0.05, vel=0.05)
-    stop_event.set()
+    stop_reading.set()
+    return (t_start, t_end)
 
 def measure_amplitude(setup: RectEIT, pos: list, depth: float, baseline: np.ndarray,
         electrodes: list[int]) -> tuple[np.ndarray, np.ndarray, list[float]]:  
@@ -49,8 +79,9 @@ def measure_amplitude(setup: RectEIT, pos: list, depth: float, baseline: np.ndar
     #### Optional
     
     ### Returns
-    - `tuple[np.ndarray, np.ndarray, list[float]]`: times list, data list,
-    and amplitudes of maximum deviation in voltage during the pressing period.
+    - `tuple[np.ndarray, np.ndarray, tuple[float], list[float]]`: times list, data list,
+    time interval of pressing, and amplitudes of maximum deviation in voltage
+    during the pressing period.
     '''
     # setup
     vel = [0.1, 0.1, 1.0]
@@ -88,25 +119,44 @@ def measure_amplitude(setup: RectEIT, pos: list, depth: float, baseline: np.ndar
     collector_thread = threading.Thread(target=read_eit_voltages,
         args=(times_list, data_list, setup, t_start, baseline, electrodes))
     collector_thread.start()
-    move_robot(setup, depth)
+    t_touch = move_robot(setup, depth)
     collector_thread.join()
-    stop_event.clear()
+    stop_reading.clear()
 
     # process data
     data_list = np.array(data_list)
     times_list = np.array(times_list)
     avg_voltages = np.mean(data_list[times_list < 5.0], axis=0)  # average the first 5 seconds
     max_deviation = np.max(np.abs(data_list[times_list >= 5.0] - avg_voltages), axis=0)  # maximum deviation from average in data thereafter
-    return times_list, data_list, max_deviation
+    return times_list, data_list, t_touch, max_deviation
 
 
 def gen_fig_2(collect_data: bool = True):
+    '''
+    Generates Figure 2 of the paper in SVG format.
+    Shows the peak response of the EIT readings at different depths and positions.
+    Also shows the time-dependent response of the EIT readings for two selected cases.
+    It takes about 10 minutes to generate from new data.
+    
+    ### Arguments
+    #### Required
+    #### Optional
+    - `collect_data` (bool, default = True): if True, run the experiment to gather
+    the data and save to a file. If False, load from that file and show that data.
+    '''    
 
-    FIG_DATA = 'output/Fig_2_Data.xlsx'
+    # The figure takes about 10 minutes to generate from new data.
+
+    FIG_DATA = 'output/Figure 2/Fig_2_Data.xlsx'
+
+    # create output save file
+    if collect_data and not os.path.exists(FIG_DATA):
+        workbook = openpyxl.Workbook()
+        workbook.save(FIG_DATA)
 
     # set up robot
     setup = RectEIT()
-    #setup.connect_to_hardware(move=True, confirm=True)
+    setup.connect_to_hardware(move=True, confirm=True)
     #setup.test_corner_calibration_positions()
     #setup.test_gear_motor(num_times=1)
 
@@ -124,6 +174,8 @@ def gen_fig_2(collect_data: bool = True):
     depth_names = ['4 mm', '8 mm', '12 mm']
     depths = [0.004, 0.008, 0.012]
     selected_num_trials = 5
+    select_1_electrode_index = 2  # ③
+    select_2_electrode_index = 1  # ②
 
     t_arrs, v_arrs = [[], []], [[], []]
     if collect_data:
@@ -133,14 +185,14 @@ def gen_fig_2(collect_data: bool = True):
             for j, (depth_name, depth) in enumerate(zip(depth_names, depths)):
                 print(f'Collecting data for site {site_name} at depth {depth_name}: '
                     f'measuring electrodes {electrode_names}')
-                is_selected = (i == 1 and j == 2) or (i == 2 and j == 2)
+                is_selected = (site_name == 'B' and depth_name == '12 mm') or (site_name == 'C' and depth_name == '12 mm')
                 # if this is one we want to select, repeat several times
                 if is_selected:
-                    selection = 1 if (i == 1 and j == 2) else 2
+                    selection = 1 if site_name == 'B' else (2 if site_name == 'C' else None)
                     # selection 1: site B, depth 12 mm, ③. selection 2: site C, depth 12 mm, ②
                     for _trial in range(selected_num_trials):
                         baseline = setup.get_baseline(average=True, num_samples=10)
-                        t_arr, v_arr, amplitudes = measure_amplitude(setup, site, depth, baseline, electrodes)
+                        t_arr, v_arr, _t_press, amplitudes = measure_amplitude(setup, site, depth, baseline, electrodes)
                         t_arrs[selection - 1].append(t_arr)
                         v_arrs[selection - 1].append(v_arr)
                 else:  # otherwise, just do it once
@@ -148,33 +200,34 @@ def gen_fig_2(collect_data: bool = True):
                     *_, amplitudes = measure_amplitude(setup, site, depth, baseline, electrodes)
                 amplitudes_data.append(amplitudes)  # if selected, the last trial is used
         
-        # save amplitude data
-        multi_index = pd.MultiIndex.from_product([site_names, depth_names], names=['Press Site', 'Depth'])
-        df_amps = pd.DataFrame(amplitudes_data, index=multi_index, columns=electrode_names)
-        df_amps.to_excel(FIG_DATA, sheet_name='Amplitudes')
-
-        # save selection time series data
-        for selection in [1, 2]:
-            dfs = []
-            for trial, (t_arr, v_arr) in enumerate(zip(t_arrs[selection - 1], v_arrs[selection - 1]), start=1):
-                trial_data = np.concatenate(
-                    (np.array(t_arr).reshape((len(t_arr), 1)), np.array(v_arr)), axis=1)
-                dfs.append(pd.DataFrame(trial_data, index=None))
-            df_all = pd.concat(dfs, axis=1)
-            df_all.columns = pd.MultiIndex.from_product(
-                [[f'Trial {i}' for i in range(1, selected_num_trials + 1)], 
-                ['Time'] + electrode_names], names=["Trial #", "Feature"])
-            df_all.to_excel(FIG_DATA, sheet_name=f'Selection {selection}')
-    else:
-        # read previously collected data
-        df_amps = pd.read_excel(FIG_DATA, sheet_name='Amplitudes', index_col=[0, 1])
-        t_arrs, v_arrs = [], []
-        for selection in [1, 2]:
-            df = pd.read_excel(FIG_DATA, sheet_name=f'Selection {selection}', index_col=0, header=[0, 1])
-            t_arrs.append(df.loc[:, df.columns.get_level_values(1) == 'Time'].values.T)
-            v_arrs.append(np.swapaxes(df.loc[:, df.columns.get_level_values(1) != 'Time'].values.reshape((len(df), -1, 3)), 0, 1))
-        t_arrs_1, t_arrs_2 = t_arrs
-        v_arrs_1, v_arrs_2 = v_arrs
+        # save data
+        with pd.ExcelWriter(FIG_DATA, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
+            # save amplitude data
+            multi_index = pd.MultiIndex.from_product([site_names, depth_names], names=['Press Site', 'Depth'])
+            df_amps = pd.DataFrame(amplitudes_data, index=multi_index, columns=electrode_names)
+            df_amps.to_excel(writer, sheet_name='Amplitudes')
+            # save selection time series data
+            for selection in [1, 2]:
+                dfs = []
+                for trial, (t_arr, v_arr) in enumerate(zip(t_arrs[selection - 1], v_arrs[selection - 1]), start=1):
+                    trial_data = np.concatenate(
+                        (np.array(t_arr).reshape((len(t_arr), 1)), np.array(v_arr)), axis=1)
+                    dfs.append(pd.DataFrame(trial_data, index=None))
+                df_all = pd.concat(dfs, axis=1)
+                df_all.columns = pd.MultiIndex.from_product(
+                    [[f'Trial {i}' for i in range(1, selected_num_trials + 1)], 
+                    ['Time'] + electrode_names], names=["Trial #", "Feature"])
+                df_all.to_excel(writer, sheet_name=f'Selection {selection}')
+    
+    # read previously collected data (whether new or old)
+    df_amps = pd.read_excel(FIG_DATA, sheet_name='Amplitudes', index_col=[0, 1])
+    t_arrs, v_arrs = [], []
+    for selection in [1, 2]:
+        df = pd.read_excel(FIG_DATA, sheet_name=f'Selection {selection}', index_col=0, header=[0, 1])
+        t_arrs.append(df.loc[:, df.columns.get_level_values(1) == 'Time'].values.T)
+        v_arrs.append(np.swapaxes(df.loc[:, df.columns.get_level_values(1) != 'Time'].values.reshape((len(df), -1, 3)), 0, 1))
+    t_arrs_1, t_arrs_2 = t_arrs
+    v_arrs_1, v_arrs_2 = v_arrs
 
     # set up axes
     fig = plt.figure(figsize=(10, 5))
@@ -209,26 +262,24 @@ def gen_fig_2(collect_data: bool = True):
             fontproperties=FontProperties(family='DejaVu Sans'), size=20)
     
     # plot bottom graphs - time series
-    SELECT_1_ELECTRODE_INDEX = 2  # ③
-    SELECT_2_ELECTRODE_INDEX = 1  # ②
     ax_t1.set_title('Response: Site B, 12 mm, ③', 
         fontproperties=FontProperties(family='DejaVu Sans'), fontweight='bold', size=10)
     for trial in range(selected_num_trials):
-        ax_t1.plot([t for t in t_arrs_1[trial, :] if t is not None],
-            [1000 * v for v in v_arrs_1[trial, :, SELECT_1_ELECTRODE_INDEX] if v is not None],
+        ax_t1.plot([t for t in t_arrs_1[trial] if t is not None],
+            [1000 * v for v in v_arrs_1[trial, :, select_1_electrode_index] if v is not None],
             alpha=0.5, label=f'Trial {trial + 1}')
     ax_t2.set_title('Response: Site C, 12 mm, ②',
         fontproperties=FontProperties(family='DejaVu Sans'), fontweight='bold', size=10)
     for trial in range(selected_num_trials):
-        ax_t2.plot([t for t in t_arrs_2[trial, :] if t is not None], 
-            [1000 * v for v in v_arrs_2[trial, :, SELECT_2_ELECTRODE_INDEX] if v is not None],
+        ax_t2.plot([t for t in t_arrs_2[trial] if t is not None], 
+            [1000 * v for v in v_arrs_2[trial, :, select_2_electrode_index] if v is not None],
             alpha=0.5, label=f'Trial {trial + 1}')
 
     ax_t1.set_xlabel('Time / s')
     ax_t1.set_ylabel(r'Response, $ \Delta V $ (mV)')
-    ax_t1.axvspan(7.0, 13.0, alpha=0.3, color='green')
+    ax_t1.axvspan(7.65, 13.65, alpha=0.3, color='green')  # interval from `_t_press`
     ax_t2.set_xlabel('Time / s')
-    ax_t2.axvspan(7.0, 13.0, alpha=0.3, color='green')
+    ax_t2.axvspan(7.65, 13.65, alpha=0.3, color='green')  # interval from `_t_press`
     ax_t1.spines['top'].set_visible(False)
     ax_t1.spines['right'].set_visible(False)
     ax_t2.spines['top'].set_visible(False)
@@ -236,10 +287,10 @@ def gen_fig_2(collect_data: bool = True):
 
     # show
     plt.subplots_adjust(hspace=0.5)
-    plt.tight_layout()
+    plt.savefig('output/Figure 2/Fig_2.svg', format='svg')
+    plt.savefig('output/Figure 2/Fig_2.png', format='png')
     plt.show()
-    plt.savefig('output/Fig_2.svg', format='svg')
+
 
 if __name__ == '__main__':
-    #time_response()
     gen_fig_2(collect_data=False)

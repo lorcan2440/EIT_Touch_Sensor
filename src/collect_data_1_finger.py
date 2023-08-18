@@ -1,5 +1,5 @@
 from RectEIT import RectEIT
-import numpy as np
+
 
 def main():
 
@@ -7,8 +7,8 @@ def main():
     ross = RectEIT()
     ross._OUTPUT_FILE = 'output/EIT_Data_Gelatin_1_finger_2_dof.xlsx'
     ross.connect_to_hardware(move=True, confirm=True)
-    #ross.test_corner_calibration_positions()
-    #ross.test_gear_motor(num_times=2)
+    ross.test_corner_calibration_positions()
+    ross.test_gear_motor(num_times=2)
 
     # get baseline
     #baseline = ross.get_baseline(output_file=self._OUTPUT_BASELINE, check_full=False)
@@ -18,7 +18,7 @@ def main():
     #pos, vol, _ = ross.get_voltages_at_rect_pos(0.05, None, 0.02, None, num_trials=3, baseline=baseline_avg, average=False)
     #ross.show_voltage_graph(vol, baseline=baseline_avg)
 
-    ross.get_randomised_data(num_trials=300, baseline=True, take_baseline_every=10,
+    ross.get_randomised_data(num_trials=91, baseline=True, take_baseline_every=10,
                              num_fingers=1)
 
     #pos = ross.get_random_pos()

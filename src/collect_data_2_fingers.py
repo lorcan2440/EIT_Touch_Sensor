@@ -19,7 +19,7 @@ def main():
     #pos, vol, _ = ross.get_voltages_at_rect_pos(0.05, None, 0.02, None, num_trials=3, baseline=baseline_avg, average=False)
     #ross.show_voltage_graph(vol, baseline=baseline_avg)
 
-    ross.get_randomised_data(num_trials=16, baseline=True, take_baseline_every=10, num_fingers=2)
+    ross.get_randomised_data(num_trials=146, baseline=True, take_baseline_every=10, num_fingers=2)
 
     #pos = ross.get_random_pos()
     #_pos, pred_pos = ross.touch_prediction(*pos, ..., num_trials=1, show_results=True)

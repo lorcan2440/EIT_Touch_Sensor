@@ -69,9 +69,9 @@ class RectEIT:
     EIT_COMMS = {'port': 'COM9', 'baudrate': 9600}  # timeout: 5
 
     # file paths
-    _OUTPUT_FILE = 'testing/EIT_Data_Gelatin_2_fingers_4_dof.xlsx'
-    _OUTPUT_BASELINE = 'testing/EIT_Baselines.xlsx'
-    _LOG_FILE = 'testing/EIT_log.txt'
+    _OUTPUT_FILE = '../output/EIT_Data_Gelatin_2_fingers_4_dof.xlsx'
+    _OUTPUT_BASELINE = '../output/EIT_Baselines.xlsx'
+    _LOG_FILE = '../output/EIT_log.txt'
     _NOTIFIER_SCRIPT = 'exp_complete_notifier.ps1'
 
     # misc
@@ -367,15 +367,16 @@ class RectEIT:
     def convert_xy_to_disp_map(self, positions: list | np.ndarray) -> np.ndarray:
         '''
         Given a set of frame coordinates, return an image-like array showing
-        the position of the fingers.
-        
+        the position of the fingers. It is OK for some of the values to be None,
+        which represent empty positions.
+            
         ### Arguments
         #### Required
         - `positions` (list | np.ndarray): list of position coordinates
         [x0, x1, ..., y0, y1, ...], in metres in the frame coordinates.
         Shape: (num_trials, 2 * num_fingers) or can be (2 * num_fingers,) if only one.
         #### Optional
-        
+            
         ### Returns
         - `np.ndarray`: array of images showing the finger positions. Each array
         will be 1 if there is a press within that tile, and 0 otherwise.
@@ -391,8 +392,10 @@ class RectEIT:
             positions = np.array(positions)
         if positions.ndim == 1:
             positions = positions.reshape(1, -1)
+
         disp_maps = []
         for pos in positions:
+            pos = pos[~np.isnan(pos)]  # remove None entries, preserve order
             disp_map = np.zeros((self.GRID_DIV_X, self.GRID_DIV_Y))
             x_list = pos[::len(pos) // 2]
             y_list = pos[len(pos) // 2::]
