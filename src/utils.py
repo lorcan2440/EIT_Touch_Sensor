@@ -218,6 +218,44 @@ def convert_xy_to_disp_map(positions: list | np.ndarray) -> np.ndarray:
     return np.array(disp_maps) if len(disp_maps) > 1 else disp_maps[0]
 
 
+def get_closest_single_points(X1: pd.DataFrame, multi_pos: np.ndarray | pd.DataFrame,
+                              index_only: bool = True) -> list[int] | list[pd.DataFrame]:
+    '''
+    Given a position array of two fingers, finds the closest matching
+    two points in the single finger dataset.
+    
+    ### Arguments
+    #### Required
+    - `X1` (pd.DataFrame): full single finger position dataset, without null columns.
+    Shape: (N, 2), where N is the number
+    - `pos_2` (np.ndarray): array of the form [x0, x1, ..., y0, y1, ...].
+    Shape: (N, 2n), where N is the number of multi-touch data points and n is the number of fingers.
+    #### Optional
+    - `index_only` (bool, default = True): if True, return the indices of the
+    matching rows, otherwise return the rows themselves.
+    
+    ### Returns
+    - `list[int] | list[pd.DataFrame]`: matching indices or rows each in the form [[x0, y0], [x1, y1], ...]
+    Shape: (N, n) for indices, or (N, n, 2) for rows.
+    '''
+
+    if isinstance(multi_pos, pd.DataFrame):
+        multi_pos = multi_pos.values
+
+    matches = []
+    for pos_arr in multi_pos:
+        matches_this_point = []
+        for xi, yi in zip(range(int(len(pos_arr) // 2)), range(int(len(pos_arr) // 2), len(pos_arr))):
+            pos = np.array([pos_arr[xi], pos_arr[yi]])
+            match_idx = np.argmin(np.linalg.norm(X1 - pos, axis=1))
+            if index_only:
+                matches_this_point.append(match_idx)
+            else:
+                matches_this_point.append(X1.iloc[match_idx, :].values)
+        matches.append(matches_this_point)
+    return np.array(matches)
+
+
 if __name__ == '__main__':
     #merge_excel_files(
     #    [f'output/EIT_Data_Gelatin_1_finger_2_dof_Set_{i}.xlsx' for i in range(1, 2)],
