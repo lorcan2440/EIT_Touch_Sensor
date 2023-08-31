@@ -1,24 +1,29 @@
 from RectEIT import RectEIT
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
 
 
 def main():
 
     # setup equipment
     ross = RectEIT()
-    ross._OUTPUT_FILE = 'output/EIT_Data_Gelatin_1_finger_2_dof.xlsx'
+    ross._OUTPUT_BASELINE = 'output/EIT_Baselines - SD.xlsx'
+    ross._OUTPUT_FILE = 'output/EIT_Data_Gelatin_1_fingers_2_dof - SD.xlsx'
+
     ross.connect_to_hardware(move=True, confirm=True)
     ross.test_corner_calibration_positions()
     ross.test_gear_motor(num_times=2)
 
     # get baseline
-    #baseline = ross.get_baseline(output_file=self._OUTPUT_BASELINE, check_full=False)
+    #baseline = ross.get_baseline(output_file=ross._OUTPUT_BASELINE, check_full=False)
     #baseline_avg = np.mean(baseline, axis=0)
     #ross.show_voltage_graph(baseline)
 
-    #pos, vol, _ = ross.get_voltages_at_rect_pos(0.05, None, 0.02, None, num_trials=3, baseline=baseline_avg, average=False)
+    #pos, vol, _ = ross.get_voltages_at_rect_pos(None, 0.04, None, 0.0375, num_trials=3, baseline=baseline_avg, average=False)
     #ross.show_voltage_graph(vol, baseline=baseline_avg)
 
-    ross.get_randomised_data(num_trials=91, baseline=True, take_baseline_every=10,
+    ross.get_randomised_data(num_trials=1000, baseline=True, take_baseline_every=10,
                              num_fingers=1)
 
     #pos = ross.get_random_pos()
@@ -34,4 +39,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()

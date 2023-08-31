@@ -46,7 +46,7 @@ class RectEIT:
     FINGER_MAX_SEP = 85 * 0.001  # m
     FINGER_MIN_SEP = 15 * 0.001  # m
     FINGER_RADIUS = 2 * 0.001  # m
-    PRESS_DEPTH = 95 * 0.001  # 95 mm
+    PRESS_DEPTH = 72 * 0.001  # 72 mm
     CORNER_ORIGIN = np.array(wp.home)  # fixed finger 4 cm above skin at corner near electrode 1, other finger parallel to 
     CLAW_TCP = wp.claw_tcp  # tip of fixed finger relative end effector
     PIVOT_R = abs(CLAW_TCP[0])  # 0.055398 m: distance between centre of end effector and fixed finger
@@ -64,14 +64,14 @@ class RectEIT:
     ELECTRODE_TO_EDGE_DIST = 0.006  # m, distance from edge of frame to centre of electrode
 
     # communications
-    ARDUINO_COMMS = {'port': 'COM8', 'baudrate': 115200}
+    ARDUINO_COMMS = {'port': 'COM3', 'baudrate': 9600}
     ROBOT_COMMS = {'port': 30010, 'db_host': '169.254.5.1'}
     EIT_COMMS = {'port': 'COM9', 'baudrate': 9600}  # timeout: 5
 
     # file paths
-    _OUTPUT_FILE = '../output/EIT_Data_Gelatin_2_fingers_4_dof.xlsx'
-    _OUTPUT_BASELINE = '../output/EIT_Baselines.xlsx'
-    _LOG_FILE = '../output/EIT_log.txt'
+    _OUTPUT_FILE = './output/EIT_Data_Gelatin_2_fingers_4_dof - ND.xlsx'
+    _OUTPUT_BASELINE = './output/EIT_Baselines - ND.xlsx'
+    _LOG_FILE = './output/EIT_log.txt'
     _NOTIFIER_SCRIPT = 'exp_complete_notifier.ps1'
 
     # misc
@@ -183,6 +183,31 @@ class RectEIT:
             time.sleep(0.5)
         self.logger.info('Motor test complete.')
     
+    def test_six_finger_motor(self, configuration: str = None, num_times: int = 1):
+        '''
+        This only works if the six fingered claw is attached to the robot tool.
+        
+        ### Arguments
+        #### Required
+        #### Optional
+        - `configuration` (str, default = None): binary string indicating
+        which fingers should be pressed down. If None, choose a random configuration each time.
+        - `num_times` (int, default = 1): number of times to repeat.
+        '''
+        self.logger.info(f'Testing six finger claw (fingers {configuration}): up -> down -> up.')
+        if num_times is None:
+            while True:
+                self.test_six_finger_motor(configuration=configuration, num_times=1)
+        for _ in range(num_times):
+            self.arduino.write(bytes([int('000000', 2)]))  # up
+            time.sleep(1.0)
+            if configuration is not None:
+                self.arduino.write(bytes([int(configuration, 2)]))  # down
+            else:
+                # pick a random 6-digit permutation
+                self.arduino.write(bytes([int(bin(random.randint(0, 63))[2:].zfill(6), 2)]))
+            time.sleep(1.0)
+
     def move_up_if_too_low(self):
         if (tmp_z := self.robot.getl()[2]) <= 0.18:
             self.logger.warning('Robot is too low. Moving up.')
@@ -805,3 +830,86 @@ class RectEIT:
         send_notification_alarm('EIT Experiment Completed!',
             f'{num_trials} points added in {total_time_taken}. Click to open the Excel workbook.',
             self._OUTPUT_FILE, self._NOTIFIER_SCRIPT, self.logger)
+    
+    def get_random_six_finger_data(self, num_trials: int = 100, append_to_dataset: bool = True,
+            take_baseline_every: int = 10, fix_num_fingers: int = 0):
+        '''
+        Conduct EIT experiments using the six-finger claw to simulate Braille.
+        
+        ### Arguments
+        #### Required
+        #### Optional
+        - `num_trials` (int, default = 100): number of experiments to perform.
+        - `append_to_dataset` (bool, default = True): whether to add results to the Excel file.
+        - `take_baseline_every` (int, default = 10): interval to take baselines at.
+        - `fix_num_fingers` (int, default = 0): if between 1 and 6, ensure that every press
+        has this many fingers down. Otherwise (default), choose a random number of fingers each time.
+        '''
+
+        self.num_expts_to_do = num_trials
+
+        times_per_trial = []
+        for trial in range(1, num_trials + 1):
+            self.logger.warning(f'------ Start of trial {trial} / {num_trials} ------ ')
+            time_start = time.time()
+            # get baseline
+            if (trial - 1) % take_baseline_every == 0:
+                baseline_data = self.get_baseline(output_file=self._OUTPUT_BASELINE, num_samples=1).reshape((-1,))
+            
+            # choose a small deviation in position - up to 8 mm from home position
+            dx = np.random.uniform(-0.008, 0.008)
+            dy = np.random.uniform(-0.008, 0.008)
+            target_pose = self.CORNER_ORIGIN + np.array([dx, dy, 0, 0, 0, 0])
+            
+            # move to position
+            self.logger.info(f'Moving to position: '
+                f'(x, y) = ({round(1000 * target_pose[0], 2)}, {round(1000 * target_pose[1], 2)}).')
+            self.robot.translatel(target_pose, acc=0.05, vel=0.05)
+
+            # put fingers down
+            if fix_num_fingers:
+                configuration = ''.join(['1' if i in random.sample(range(6), fix_num_fingers) else '0' for i in range(6)])
+            else:
+                configuration = bin(random.randint(0, 63))[2:].zfill(6)
+            self.arduino.write(bytes([int(configuration, 2)]))
+
+            # move down
+            self.robot.translatel_rel([0, 0, -1 * self.PRESS_DEPTH, 0, 0, 0], acc=0.05, vel=0.05)
+
+            # conduct one experiment (time averaging) and save
+            samples = np.array([self.read_eit_voltages() for _ in range(5)])
+            samples = np.mean(samples, axis=0).reshape(1, -1)
+            self.logger.info(f'Received EIT data (sample {trial}).')
+            rel_voltages = samples - baseline_data
+            conf_arr = lambda c: np.array([int(i) for i in c])
+            if append_to_dataset:
+                self.save_to_excel([rel_voltages, conf_arr(configuration)],
+                                   ['Voltages', 'Configuration'],
+                                   [self.VOLTAGES_HEADERS, [0, 1, 2, 3, 4, 5]],
+                                   self._OUTPUT_FILE, trial=trial)
+            
+            # move up and back to home
+            self.robot.translatel_rel([0, 0, self.PRESS_DEPTH, 0, 0, 0], acc=0.05, vel=0.05)
+            self.robot.translatel(self.CORNER_ORIGIN, acc=0.05, vel=0.05)
+
+            # calculate expected time to finish all trials
+            times_per_trial.append(time.time() - time_start)
+            time_remaining = round(np.mean(times_per_trial) * (num_trials - trial), 2)
+            time_remaining = seconds_to_hms(time_remaining)
+            self.logger.info(f'Trial {trial} / {num_trials} done. '
+                             f'Expected time remaining: {time_remaining}.')
+        
+        # notify that experiment is complete
+        total_time_taken = seconds_to_hms(sum(times_per_trial))
+        self.logger.info(f'Randomised data collection complete. {num_trials} data points obtained.')
+        send_notification_alarm('EIT Experiment Completed!',
+            f'{num_trials} points added in {total_time_taken}. Click to open the Excel workbook.',
+            self._OUTPUT_FILE, self._NOTIFIER_SCRIPT, self.logger)
+
+
+if __name__ == '__main__':
+
+    setup = RectEIT()
+    setup.connect_to_hardware(move=True, confirm=True)
+
+

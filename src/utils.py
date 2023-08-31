@@ -210,8 +210,8 @@ def convert_xy_to_disp_map(positions: list | np.ndarray) -> np.ndarray:
     for pos in positions:
         pos = pos[~np.isnan(pos)]  # remove None entries, preserve order
         disp_map = np.zeros((GRID_DIV_X, GRID_DIV_Y))
-        x_list = pos[::len(pos) // 2]
-        y_list = pos[len(pos) // 2::]
+        x_list = pos[:len(pos) // 2]
+        y_list = pos[len(pos) // 2:]
         for x, y in zip(x_list, y_list):
             disp_map[int(x // tile_x), int(y // tile_y)] = 1.0
         disp_maps.append(disp_map)
@@ -257,12 +257,7 @@ def get_closest_single_points(X1: pd.DataFrame, multi_pos: np.ndarray | pd.DataF
 
 
 if __name__ == '__main__':
-    #merge_excel_files(
-    #    [f'output/EIT_Data_Gelatin_1_finger_2_dof_Set_{i}.xlsx' for i in range(1, 2)],
-    #    'output/EIT_Data_Gelatin_1_finger_2_dof.xlsx'
-    #)
-
-    pos = pd.DataFrame([[0.05, None, 0.08, None], [0.05, 0.03, 0.08, 0.02]])
-    print(pos)
-
-    print(convert_xy_to_disp_map(pos.values))
+    merge_excel_files(
+       [f'output/EIT_Data_Gelatin_2_fingers_4_dof - SD_Set_{i}.xlsx' for i in range(1, 5)],
+        'output/EIT_Data_Gelatin_2_fingers_4_dof - SD.xlsx'
+    )

@@ -155,8 +155,8 @@ def gen_fig_2(collect_data: bool = True):
         workbook.save(FIG_DATA)
 
     # set up robot
-    setup = RectEIT()
-    setup.connect_to_hardware(move=True, confirm=True)
+    #setup = RectEIT()
+    #setup.connect_to_hardware(move=True, confirm=True)
     #setup.test_corner_calibration_positions()
     #setup.test_gear_motor(num_times=1)
 
@@ -287,8 +287,8 @@ def gen_fig_2(collect_data: bool = True):
 
     # show
     plt.subplots_adjust(hspace=0.5)
-    plt.savefig('output/Figure 2/Fig_2.svg', format='svg')
-    plt.savefig('output/Figure 2/Fig_2.png', format='png')
+    plt.savefig('output/Figure 2/Fig_2.pdf', format='pdf')
+    #plt.savefig('output/Figure 2/Fig_2.png', format='png')
     plt.show()
 
 
