@@ -12161,3 +12161,318 @@
 2023-08-08 14:42:47,719 - INFO - Trial 3 / 48 done. Expected time remaining: 01h18m22s.
 2023-08-08 14:42:47,720 - WARNING - ------ Start of trial 4 / 48 ------ 
 2023-08-08 14:42:47,729 - INFO - Moving to position: (x0, x1, y0, y1) = (33.16, 60.12, 64.46, 46.41); d = 32.45 [mm].
+2023-08-31 15:18:12,299 - INFO - Robot initial position: [-0.554334, -0.214924, 0.127236, -2.90675, -1.18126, 0.0274552]
+2023-08-31 15:18:12,307 - INFO - Robot initial joint angles: [0.124938, -0.906988, 1.29802, -5.12178, 1.56807, 4.06604]
+2023-08-31 15:18:18,805 - WARNING - The robot is moving to its starting position.
+2023-08-31 15:18:18,811 - WARNING - Robot is too low. Moving up.
+2023-08-31 15:18:22,387 - INFO - Testing six finger claw (fingers 100000): up -> down -> up.
+2023-08-31 15:18:44,409 - INFO - Robot initial position: [-0.551241, -0.218156, 0.180011, 2.9113, 1.15728, -0.0454811]
+2023-08-31 15:18:44,417 - INFO - Robot initial joint angles: [0.129024, -0.959015, 1.24335, -5.0232, 1.55357, 4.08539]
+2023-08-31 15:19:04,633 - WARNING - The robot is moving to its starting position.
+2023-08-31 15:19:04,648 - INFO - Testing six finger claw (fingers 010000): up -> down -> up.
+2023-08-31 15:19:22,775 - INFO - Robot initial position: [-0.55125, -0.218166, 0.180038, 2.91126, 1.15729, -0.0456312]
+2023-08-31 15:19:22,783 - INFO - Robot initial joint angles: [0.129024, -0.959028, 1.24333, -5.02318, 1.55352, 4.08539]
+2023-08-31 15:19:24,370 - WARNING - The robot is moving to its starting position.
+2023-08-31 15:19:24,383 - INFO - Testing six finger claw (fingers 001000): up -> down -> up.
+2023-08-31 15:19:40,591 - INFO - Robot initial position: [-0.551222, -0.218189, 0.180029, 2.91122, 1.15741, -0.0455308]
+2023-08-31 15:19:40,598 - INFO - Robot initial joint angles: [0.129012, -0.958979, 1.24335, -5.02318, 1.55353, 4.08539]
+2023-08-31 15:19:42,945 - WARNING - The robot is moving to its starting position.
+2023-08-31 15:19:42,958 - INFO - Testing six finger claw (fingers 000100): up -> down -> up.
+2023-08-31 15:19:59,285 - INFO - Robot initial position: [-0.551245, -0.21816, 0.179996, 2.91126, 1.15729, -0.0454364]
+2023-08-31 15:19:59,293 - INFO - Robot initial joint angles: [0.129024, -0.959003, 1.24329, -5.0232, 1.55357, 4.08541]
+2023-08-31 15:20:00,687 - WARNING - The robot is moving to its starting position.
+2023-08-31 15:20:00,701 - INFO - Testing six finger claw (fingers 000010): up -> down -> up.
+2023-08-31 16:36:09,791 - INFO - Robot initial position: [-0.551268, -0.218136, 0.179983, 2.91129, 1.15722, -0.0454549]
+2023-08-31 16:36:09,807 - INFO - Robot initial joint angles: [0.128964, -0.959003, 1.2433, -5.02318, 1.55355, 4.08537]
+2023-08-31 16:36:12,751 - WARNING - The robot is moving to its starting position.
+2023-08-31 16:36:12,767 - INFO - Testing six finger claw (fingers None): up -> down -> up.
+2023-08-31 16:36:18,831 - WARNING - ------ Start of trial 1 / 1000 ------ 
+2023-08-31 16:36:18,832 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-31 16:36:18,993 - INFO - Baseline EIT data obtained.
+2023-08-31 16:36:23,039 - INFO - Appending data in Baseline (./output/EIT_Baselines - ND.xlsx) from rows 325 to 325.
+2023-08-31 16:36:25,539 - INFO - Moving to position: (x, y) = (-554.21, -218.62).
+2023-08-31 16:36:31,029 - INFO - Received EIT data (sample 1).
+2023-08-31 16:36:31,237 - INFO - Created new Excel file output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx.
+2023-08-31 16:36:31,275 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 2 to 2.
+2023-08-31 16:36:31,403 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 2 to 2.
+2023-08-31 16:36:34,391 - INFO - Trial 1 / 1000 done. Expected time remaining: 04h19m02s.
+2023-08-31 16:36:34,391 - WARNING - ------ Start of trial 2 / 1000 ------ 
+2023-08-31 16:36:34,392 - INFO - Moving to position: (x, y) = (-557.92, -210.66).
+2023-08-31 16:36:39,990 - INFO - Received EIT data (sample 2).
+2023-08-31 16:36:40,036 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 3 to 3.
+2023-08-31 16:36:40,182 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 3 to 3.
+2023-08-31 16:36:43,574 - INFO - Trial 2 / 1000 done. Expected time remaining: 03h25m45s.
+2023-08-31 16:36:43,574 - WARNING - ------ Start of trial 3 / 1000 ------ 
+2023-08-31 16:36:43,575 - INFO - Moving to position: (x, y) = (-558.12, -215.2).
+2023-08-31 16:36:49,019 - INFO - Received EIT data (sample 3).
+2023-08-31 16:36:49,079 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 4 to 4.
+2023-08-31 16:36:49,247 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 4 to 4.
+2023-08-31 16:36:52,518 - INFO - Trial 3 / 1000 done. Expected time remaining: 03h06m33s.
+2023-08-31 16:36:52,519 - WARNING - ------ Start of trial 4 / 1000 ------ 
+2023-08-31 16:36:52,520 - INFO - Moving to position: (x, y) = (-558.14, -218.59).
+2023-08-31 16:36:58,012 - INFO - Received EIT data (sample 4).
+2023-08-31 16:36:58,077 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 5 to 5.
+2023-08-31 16:36:58,426 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 5 to 5.
+2023-08-31 16:37:01,702 - INFO - Trial 4 / 1000 done. Expected time remaining: 02h57m53s.
+2023-08-31 16:37:01,704 - WARNING - ------ Start of trial 5 / 1000 ------ 
+2023-08-31 16:37:01,706 - INFO - Moving to position: (x, y) = (-556.97, -211.32).
+2023-08-31 16:37:07,560 - INFO - Received EIT data (sample 5).
+2023-08-31 16:37:07,648 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 6 to 6.
+2023-08-31 16:37:07,841 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 6 to 6.
+2023-08-31 16:37:11,228 - INFO - Trial 5 / 1000 done. Expected time remaining: 02h53m45s.
+2023-08-31 16:37:11,229 - WARNING - ------ Start of trial 6 / 1000 ------ 
+2023-08-31 16:37:11,230 - INFO - Moving to position: (x, y) = (-546.77, -211.91).
+2023-08-31 16:37:16,533 - INFO - Received EIT data (sample 6).
+2023-08-31 16:37:16,623 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 7 to 7.
+2023-08-31 16:37:16,859 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 7 to 7.
+2023-08-31 16:37:20,165 - INFO - Trial 6 / 1000 done. Expected time remaining: 02h49m19s.
+2023-08-31 16:37:20,167 - WARNING - ------ Start of trial 7 / 1000 ------ 
+2023-08-31 16:37:20,167 - INFO - Moving to position: (x, y) = (-554.19, -218.59).
+2023-08-31 16:37:25,520 - INFO - Received EIT data (sample 7).
+2023-08-31 16:37:25,625 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 8 to 8.
+2023-08-31 16:37:25,887 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 8 to 8.
+2023-08-31 16:37:28,925 - INFO - Trial 7 / 1000 done. Expected time remaining: 02h45m41s.
+2023-08-31 16:37:28,927 - WARNING - ------ Start of trial 8 / 1000 ------ 
+2023-08-31 16:37:28,929 - INFO - Moving to position: (x, y) = (-553.71, -210.86).
+2023-08-31 16:37:34,529 - INFO - Received EIT data (sample 8).
+2023-08-31 16:37:34,679 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 9 to 9.
+2023-08-31 16:37:34,925 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 9 to 9.
+2023-08-31 16:37:38,252 - INFO - Trial 8 / 1000 done. Expected time remaining: 02h44m06s.
+2023-08-31 16:37:38,253 - WARNING - ------ Start of trial 9 / 1000 ------ 
+2023-08-31 16:37:38,254 - INFO - Moving to position: (x, y) = (-546.97, -216.95).
+2023-08-31 16:37:43,568 - INFO - Received EIT data (sample 9).
+2023-08-31 16:37:43,744 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 10 to 10.
+2023-08-31 16:37:44,067 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 10 to 10.
+2023-08-31 16:37:47,244 - INFO - Trial 9 / 1000 done. Expected time remaining: 02h42m13s.
+2023-08-31 16:37:47,246 - WARNING - ------ Start of trial 10 / 1000 ------ 
+2023-08-31 16:37:47,248 - INFO - Moving to position: (x, y) = (-558.39, -218.12).
+2023-08-31 16:37:52,494 - INFO - Received EIT data (sample 10).
+2023-08-31 16:37:52,677 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 11 to 11.
+2023-08-31 16:37:53,025 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 11 to 11.
+2023-08-31 16:37:56,347 - INFO - Trial 10 / 1000 done. Expected time remaining: 02h40m51s.
+2023-08-31 16:37:56,349 - WARNING - ------ Start of trial 11 / 1000 ------ 
+2023-08-31 16:37:56,351 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-31 16:37:56,522 - INFO - Baseline EIT data obtained.
+2023-08-31 16:38:00,657 - INFO - Appending data in Baseline (./output/EIT_Baselines - ND.xlsx) from rows 326 to 326.
+2023-08-31 16:38:03,102 - INFO - Moving to position: (x, y) = (-544.85, -221.23).
+2023-08-31 16:38:08,785 - INFO - Received EIT data (sample 11).
+2023-08-31 16:38:09,092 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 12 to 12.
+2023-08-31 16:38:09,427 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 12 to 12.
+2023-08-31 16:38:12,747 - INFO - Trial 11 / 1000 done. Expected time remaining: 02h50m39s.
+2023-08-31 16:38:12,749 - WARNING - ------ Start of trial 12 / 1000 ------ 
+2023-08-31 16:38:12,751 - INFO - Moving to position: (x, y) = (-554.47, -220.36).
+2023-08-31 16:38:17,798 - INFO - Received EIT data (sample 12).
+2023-08-31 16:38:17,991 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 13 to 13.
+2023-08-31 16:38:18,369 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 13 to 13.
+2023-08-31 16:38:21,513 - INFO - Trial 12 / 1000 done. Expected time remaining: 02h48m18s.
+2023-08-31 16:38:21,514 - WARNING - ------ Start of trial 13 / 1000 ------ 
+2023-08-31 16:38:21,515 - INFO - Moving to position: (x, y) = (-554.68, -210.76).
+2023-08-31 16:38:27,331 - INFO - Received EIT data (sample 13).
+2023-08-31 16:38:27,539 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 14 to 14.
+2023-08-31 16:38:27,919 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 14 to 14.
+2023-08-31 16:38:31,305 - INFO - Trial 13 / 1000 done. Expected time remaining: 02h47m35s.
+2023-08-31 16:38:31,307 - WARNING - ------ Start of trial 14 / 1000 ------ 
+2023-08-31 16:38:31,309 - INFO - Moving to position: (x, y) = (-552.96, -217.21).
+2023-08-31 16:38:36,365 - INFO - Received EIT data (sample 14).
+2023-08-31 16:38:36,590 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 15 to 15.
+2023-08-31 16:38:37,022 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 15 to 15.
+2023-08-31 16:38:39,993 - INFO - Trial 14 / 1000 done. Expected time remaining: 02h45m39s.
+2023-08-31 16:38:39,994 - WARNING - ------ Start of trial 15 / 1000 ------ 
+2023-08-31 16:38:39,996 - INFO - Moving to position: (x, y) = (-554.56, -224.24).
+2023-08-31 16:38:45,312 - INFO - Received EIT data (sample 15).
+2023-08-31 16:38:45,535 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 16 to 16.
+2023-08-31 16:38:45,947 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 16 to 16.
+2023-08-31 16:38:49,288 - INFO - Trial 15 / 1000 done. Expected time remaining: 02h44m37s.
+2023-08-31 16:38:49,288 - WARNING - ------ Start of trial 16 / 1000 ------ 
+2023-08-31 16:38:49,289 - INFO - Moving to position: (x, y) = (-555.77, -218.55).
+2023-08-31 16:38:54,885 - INFO - Received EIT data (sample 16).
+2023-08-31 16:38:55,163 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 17 to 17.
+2023-08-31 16:38:55,627 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 17 to 17.
+2023-08-31 16:38:58,831 - INFO - Trial 16 / 1000 done. Expected time remaining: 02h43m57s.
+2023-08-31 16:38:58,832 - WARNING - ------ Start of trial 17 / 1000 ------ 
+2023-08-31 16:38:58,833 - INFO - Moving to position: (x, y) = (-544.8, -210.83).
+2023-08-31 16:39:04,427 - INFO - Received EIT data (sample 17).
+2023-08-31 16:39:04,751 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 18 to 18.
+2023-08-31 16:39:05,298 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 18 to 18.
+2023-08-31 16:39:08,815 - INFO - Trial 17 / 1000 done. Expected time remaining: 02h43m46s.
+2023-08-31 16:39:08,815 - WARNING - ------ Start of trial 18 / 1000 ------ 
+2023-08-31 16:39:08,816 - INFO - Moving to position: (x, y) = (-544.73, -218.23).
+2023-08-31 16:39:14,566 - INFO - Received EIT data (sample 18).
+2023-08-31 16:39:14,874 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 19 to 19.
+2023-08-31 16:39:15,371 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 19 to 19.
+2023-08-31 16:39:18,735 - INFO - Trial 18 / 1000 done. Expected time remaining: 02h43m32s.
+2023-08-31 16:39:18,735 - WARNING - ------ Start of trial 19 / 1000 ------ 
+2023-08-31 16:39:18,736 - INFO - Moving to position: (x, y) = (-554.11, -220.91).
+2023-08-31 16:39:24,091 - INFO - Received EIT data (sample 19).
+2023-08-31 16:39:24,405 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 20 to 20.
+2023-08-31 16:39:24,959 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 20 to 20.
+2023-08-31 16:39:28,141 - INFO - Trial 19 / 1000 done. Expected time remaining: 02h42m52s.
+2023-08-31 16:39:28,143 - WARNING - ------ Start of trial 20 / 1000 ------ 
+2023-08-31 16:39:28,144 - INFO - Moving to position: (x, y) = (-547.83, -220.22).
+2023-08-31 16:39:33,640 - INFO - Received EIT data (sample 20).
+2023-08-31 16:39:33,947 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 21 to 21.
+2023-08-31 16:39:34,491 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 21 to 21.
+2023-08-31 16:39:37,685 - INFO - Trial 20 / 1000 done. Expected time remaining: 02h42m21s.
+2023-08-31 16:39:37,686 - WARNING - ------ Start of trial 21 / 1000 ------ 
+2023-08-31 16:39:37,687 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-31 16:39:37,845 - INFO - Baseline EIT data obtained.
+2023-08-31 16:39:42,097 - INFO - Appending data in Baseline (./output/EIT_Baselines - ND.xlsx) from rows 327 to 327.
+2023-08-31 16:39:45,407 - INFO - Moving to position: (x, y) = (-558.09, -218.27).
+2023-08-31 16:46:41,864 - INFO - Robot initial position: [-0.558095, -0.218231, 0.160948, 2.91065, 1.15639, -0.0436961]
+2023-08-31 16:46:41,888 - INFO - Robot initial joint angles: [0.127335, -0.928865, 1.24419, -5.05286, 1.55292, 4.08421]
+2023-08-31 16:46:55,139 - WARNING - The robot is moving to its starting position.
+2023-08-31 16:46:55,143 - WARNING - Robot is too low. Moving up.
+2023-08-31 16:47:58,004 - INFO - Robot initial position: [-0.551244, -0.218168, 0.099532, 2.9112, 1.15743, -0.0453193]
+2023-08-31 16:47:58,012 - INFO - Robot initial joint angles: [0.129036, -0.887793, 1.34246, -5.19346, 1.5536, 4.08568]
+2023-08-31 16:48:50,535 - WARNING - The robot is moving to its starting position.
+2023-08-31 16:48:50,545 - WARNING - Robot is too low. Moving up.
+2023-08-31 16:48:53,273 - INFO - Testing six finger claw (fingers None): up -> down -> up.
+2023-08-31 16:48:59,329 - WARNING - ------ Start of trial 1 / 1000 ------ 
+2023-08-31 16:48:59,332 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-31 16:48:59,498 - INFO - Baseline EIT data obtained.
+2023-08-31 16:49:03,618 - INFO - Appending data in Baseline (./output/EIT_Baselines - ND.xlsx) from rows 328 to 328.
+2023-08-31 16:49:06,126 - INFO - Moving to position: (x, y) = (-554.52, -223.22).
+2023-08-31 16:49:11,670 - INFO - Received EIT data (sample 1).
+2023-08-31 16:49:11,923 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 22 to 22.
+2023-08-31 16:49:12,607 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 22 to 22.
+2023-08-31 16:49:15,948 - INFO - Trial 1 / 1000 done. Expected time remaining: 04h36m36s.
+2023-08-31 16:49:15,948 - WARNING - ------ Start of trial 2 / 1000 ------ 
+2023-08-31 16:49:15,949 - INFO - Moving to position: (x, y) = (-546.17, -216.37).
+2023-08-31 16:49:21,327 - INFO - Received EIT data (sample 2).
+2023-08-31 16:49:21,648 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 23 to 23.
+2023-08-31 16:49:22,219 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 23 to 23.
+2023-08-31 16:49:25,528 - INFO - Trial 2 / 1000 done. Expected time remaining: 03h37m49s.
+2023-08-31 16:49:25,530 - WARNING - ------ Start of trial 3 / 1000 ------ 
+2023-08-31 16:49:25,532 - INFO - Moving to position: (x, y) = (-549.4, -219.67).
+2023-08-31 16:49:30,427 - INFO - Received EIT data (sample 3).
+2023-08-31 16:49:30,752 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 24 to 24.
+2023-08-31 16:49:31,328 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 24 to 24.
+2023-08-31 16:49:34,430 - INFO - Trial 3 / 1000 done. Expected time remaining: 03h14m21s.
+2023-08-31 16:49:34,431 - WARNING - ------ Start of trial 4 / 1000 ------ 
+2023-08-31 16:49:34,431 - INFO - Moving to position: (x, y) = (-546.07, -219.43).
+2023-08-31 16:49:39,567 - INFO - Received EIT data (sample 4).
+2023-08-31 16:49:39,965 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 25 to 25.
+2023-08-31 16:49:40,575 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 25 to 25.
+2023-08-31 16:49:43,887 - INFO - Trial 4 / 1000 done. Expected time remaining: 03h04m52s.
+2023-08-31 16:49:43,887 - WARNING - ------ Start of trial 5 / 1000 ------ 
+2023-08-31 16:49:43,888 - INFO - Moving to position: (x, y) = (-550.98, -216.73).
+2023-08-31 16:49:48,667 - INFO - Received EIT data (sample 5).
+2023-08-31 16:49:49,032 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 26 to 26.
+2023-08-31 16:49:49,637 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 26 to 26.
+2023-08-31 16:49:52,686 - INFO - Trial 5 / 1000 done. Expected time remaining: 02h56m55s.
+2023-08-31 16:49:52,686 - WARNING - ------ Start of trial 6 / 1000 ------ 
+2023-08-31 16:49:52,687 - INFO - Moving to position: (x, y) = (-555.54, -224.41).
+2023-08-31 16:49:58,331 - INFO - Received EIT data (sample 6).
+2023-08-31 16:49:58,689 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 27 to 27.
+2023-08-31 16:49:59,312 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 27 to 27.
+2023-08-31 16:50:02,766 - INFO - Trial 6 / 1000 done. Expected time remaining: 02h55m07s.
+2023-08-31 16:50:02,768 - WARNING - ------ Start of trial 7 / 1000 ------ 
+2023-08-31 16:50:02,770 - INFO - Moving to position: (x, y) = (-552.61, -220.28).
+2023-08-31 16:50:08,008 - INFO - Received EIT data (sample 7).
+2023-08-31 16:50:08,423 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 28 to 28.
+2023-08-31 16:50:09,108 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 28 to 28.
+2023-08-31 16:50:12,293 - INFO - Trial 7 / 1000 done. Expected time remaining: 02h52m28s.
+2023-08-31 16:50:12,295 - WARNING - ------ Start of trial 8 / 1000 ------ 
+2023-08-31 16:50:12,297 - INFO - Moving to position: (x, y) = (-557.64, -216.58).
+2023-08-31 16:50:17,692 - INFO - Received EIT data (sample 8).
+2023-08-31 16:50:18,154 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 29 to 29.
+2023-08-31 16:50:18,862 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 29 to 29.
+2023-08-31 16:50:22,317 - INFO - Trial 8 / 1000 done. Expected time remaining: 02h51m28s.
+2023-08-31 16:50:22,317 - WARNING - ------ Start of trial 9 / 1000 ------ 
+2023-08-31 16:50:22,318 - INFO - Moving to position: (x, y) = (-552.95, -218.04).
+2023-08-31 16:50:27,350 - INFO - Received EIT data (sample 9).
+2023-08-31 16:50:27,785 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 30 to 30.
+2023-08-31 16:50:28,485 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 30 to 30.
+2023-08-31 16:50:31,556 - INFO - Trial 9 / 1000 done. Expected time remaining: 02h49m13s.
+2023-08-31 16:50:31,556 - WARNING - ------ Start of trial 10 / 1000 ------ 
+2023-08-31 16:50:31,557 - INFO - Moving to position: (x, y) = (-554.38, -222.3).
+2023-08-31 16:50:37,020 - INFO - Received EIT data (sample 10).
+2023-08-31 16:50:37,489 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 31 to 31.
+2023-08-31 16:50:38,234 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 31 to 31.
+2023-08-31 16:50:41,629 - INFO - Trial 10 / 1000 done. Expected time remaining: 02h48m45s.
+2023-08-31 16:50:41,631 - WARNING - ------ Start of trial 11 / 1000 ------ 
+2023-08-31 16:50:41,633 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-31 16:50:41,785 - INFO - Baseline EIT data obtained.
+2023-08-31 16:50:46,770 - INFO - Appending data in Baseline (./output/EIT_Baselines - ND.xlsx) from rows 329 to 329.
+2023-08-31 16:50:49,783 - INFO - Moving to position: (x, y) = (-546.3, -211.79).
+2023-08-31 16:50:55,213 - INFO - Received EIT data (sample 11).
+2023-08-31 16:50:55,767 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 32 to 32.
+2023-08-31 16:50:56,612 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 32 to 32.
+2023-08-31 16:51:00,250 - INFO - Trial 11 / 1000 done. Expected time remaining: 03h01m09s.
+2023-08-31 16:51:00,250 - WARNING - ------ Start of trial 12 / 1000 ------ 
+2023-08-31 16:51:00,251 - INFO - Moving to position: (x, y) = (-550.51, -225.06).
+2023-08-31 16:51:05,449 - INFO - Received EIT data (sample 12).
+2023-08-31 16:51:05,881 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 33 to 33.
+2023-08-31 16:51:06,629 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 33 to 33.
+2023-08-31 16:51:10,163 - INFO - Trial 12 / 1000 done. Expected time remaining: 02h59m29s.
+2023-08-31 16:51:10,164 - WARNING - ------ Start of trial 13 / 1000 ------ 
+2023-08-31 16:51:10,167 - INFO - Moving to position: (x, y) = (-545.56, -214.55).
+2023-08-31 16:51:15,671 - INFO - Received EIT data (sample 13).
+2023-08-31 16:51:16,145 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 34 to 34.
+2023-08-31 16:51:16,953 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 34 to 34.
+2023-08-31 16:51:20,410 - INFO - Trial 13 / 1000 done. Expected time remaining: 02h58m29s.
+2023-08-31 16:51:20,411 - WARNING - ------ Start of trial 14 / 1000 ------ 
+2023-08-31 16:51:20,412 - INFO - Moving to position: (x, y) = (-550.21, -215.83).
+2023-08-31 16:51:25,336 - INFO - Received EIT data (sample 14).
+2023-08-31 16:51:25,895 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 35 to 35.
+2023-08-31 16:51:26,671 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 35 to 35.
+2023-08-31 16:51:29,898 - INFO - Trial 14 / 1000 done. Expected time remaining: 02h56m42s.
+2023-08-31 16:51:29,900 - WARNING - ------ Start of trial 15 / 1000 ------ 
+2023-08-31 16:51:29,902 - INFO - Moving to position: (x, y) = (-557.04, -223.03).
+2023-08-31 16:51:35,580 - INFO - Received EIT data (sample 15).
+2023-08-31 16:51:36,056 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 36 to 36.
+2023-08-31 16:51:36,869 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 36 to 36.
+2023-08-31 16:51:40,424 - INFO - Trial 15 / 1000 done. Expected time remaining: 02h56m16s.
+2023-08-31 16:51:40,425 - WARNING - ------ Start of trial 16 / 1000 ------ 
+2023-08-31 16:51:40,425 - INFO - Moving to position: (x, y) = (-558.69, -219.14).
+2023-08-31 16:51:45,808 - INFO - Received EIT data (sample 16).
+2023-08-31 16:51:46,266 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 37 to 37.
+2023-08-31 16:51:47,185 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 37 to 37.
+2023-08-31 16:51:50,753 - INFO - Trial 16 / 1000 done. Expected time remaining: 02h55m40s.
+2023-08-31 16:51:50,755 - WARNING - ------ Start of trial 17 / 1000 ------ 
+2023-08-31 16:51:50,757 - INFO - Moving to position: (x, y) = (-546.09, -213.04).
+2023-08-31 16:51:56,034 - INFO - Received EIT data (sample 17).
+2023-08-31 16:51:56,516 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 38 to 38.
+2023-08-31 16:51:57,364 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 38 to 38.
+2023-08-31 16:52:00,879 - INFO - Trial 17 / 1000 done. Expected time remaining: 02h54m55s.
+2023-08-31 16:52:00,881 - WARNING - ------ Start of trial 18 / 1000 ------ 
+2023-08-31 16:52:00,882 - INFO - Moving to position: (x, y) = (-555.66, -219.24).
+2023-08-31 16:52:06,271 - INFO - Received EIT data (sample 18).
+2023-08-31 16:52:06,856 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 39 to 39.
+2023-08-31 16:52:07,808 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 39 to 39.
+2023-08-31 16:52:11,224 - INFO - Trial 18 / 1000 done. Expected time remaining: 02h54m26s.
+2023-08-31 16:52:11,226 - WARNING - ------ Start of trial 19 / 1000 ------ 
+2023-08-31 16:52:11,228 - INFO - Moving to position: (x, y) = (-558.3, -214.77).
+2023-08-31 16:52:16,480 - INFO - Received EIT data (sample 19).
+2023-08-31 16:52:16,998 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 40 to 40.
+2023-08-31 16:52:17,890 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 40 to 40.
+2023-08-31 16:52:21,446 - INFO - Trial 19 / 1000 done. Expected time remaining: 02h53m53s.
+2023-08-31 16:52:21,447 - WARNING - ------ Start of trial 20 / 1000 ------ 
+2023-08-31 16:52:21,448 - INFO - Moving to position: (x, y) = (-544.19, -215.04).
+2023-08-31 16:52:26,724 - INFO - Received EIT data (sample 20).
+2023-08-31 16:52:27,274 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 41 to 41.
+2023-08-31 16:52:28,182 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 41 to 41.
+2023-08-31 16:52:31,806 - INFO - Trial 20 / 1000 done. Expected time remaining: 02h53m29s.
+2023-08-31 16:52:31,808 - WARNING - ------ Start of trial 21 / 1000 ------ 
+2023-08-31 16:52:31,810 - INFO - Obtaining baseline EIT data. The robot will not move.
+2023-08-31 16:52:31,991 - INFO - Baseline EIT data obtained.
+2023-08-31 16:52:35,950 - INFO - Appending data in Baseline (./output/EIT_Baselines - ND.xlsx) from rows 330 to 330.
+2023-08-31 16:52:38,461 - INFO - Moving to position: (x, y) = (-556.2, -213.96).
+2023-08-31 16:52:43,799 - INFO - Received EIT data (sample 21).
+2023-08-31 16:52:44,293 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 42 to 42.
+2023-08-31 16:52:45,400 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 42 to 42.
+2023-08-31 16:52:48,901 - INFO - Trial 21 / 1000 done. Expected time remaining: 02h58m20s.
+2023-08-31 16:52:48,903 - WARNING - ------ Start of trial 22 / 1000 ------ 
+2023-08-31 16:52:48,905 - INFO - Moving to position: (x, y) = (-550.16, -219.79).
+2023-08-31 16:52:54,032 - INFO - Received EIT data (sample 22).
+2023-08-31 16:52:54,666 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 43 to 43.
+2023-08-31 16:52:55,705 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 43 to 43.
+2023-08-31 16:52:58,997 - INFO - Trial 22 / 1000 done. Expected time remaining: 02h57m31s.
+2023-08-31 16:52:58,998 - WARNING - ------ Start of trial 23 / 1000 ------ 
+2023-08-31 16:52:58,999 - INFO - Moving to position: (x, y) = (-543.42, -217.8).
+2023-08-31 16:53:04,260 - INFO - Received EIT data (sample 23).
+2023-08-31 16:53:04,821 - INFO - Appending data in Voltages (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 44 to 44.
+2023-08-31 16:53:05,787 - INFO - Appending data in Configuration (output/EIT_Data_Gelatin_6_fingers - SD - demo set_Set_1.xlsx) from rows 44 to 44.
+2023-08-31 16:53:09,436 - INFO - Trial 23 / 1000 done. Expected time remaining: 02h57m01s.
+2023-08-31 16:53:09,436 - WARNING - ------ Start of trial 24 / 1000 ------ 
+2023-08-31 16:53:09,437 - INFO - Moving to position: (x, y) = (-549.69, -224.25).
