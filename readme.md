@@ -29,3 +29,5 @@ Once an optimally trained model is found, when the skin receives a new press, it
 An initial idea was to use COMSOL to simulate the EIT process to gather the training data automatically, however the interplay between stress, conductivity and displacement for these soft composite materials was deemed too complex to be reliable, so the real robot was used instead.
 
 As a demonstration, Braille (how blind people read) can be pressed into the skin to find the positions of the dots, and then passed into another algorithm to identify the letter it represents, allowing the skin to read Braille.
+
+Supervised by and worked with: https://github.com/DSHardman/HydrogelEIT
