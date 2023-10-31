@@ -31,13 +31,15 @@
 \usepackage{amssymb}  % assumes amsmath package installed
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{placeins}
+\usepackage{hyperref}
 
 \title{\LARGE \bf
-Multi-touch Recognition of Hydrogel E-skins using [MORE SPECIFIC APPROACH DETAILS GO HERE - composites/superposition] Data-driven Electrical Impedance Tomography
-}
+Multi-touch Recognition of Hydrogel-based E-skins using Real-world EIT Datasets}
 
 
-\author{Lorcan Nicholls$^{1}$, David Hardman$^{1*}$ and Fumiya Iida$^{1}$% <-this % stops a space
+\author{Lorcan Nicholls$^{1*}$, David Hardman$^{1*}$ and Fumiya Iida$^{1}$% <-this % stops a space
+\thanks{* Authors contributed equally.}
 \thanks{$^{1}$All authors are with the Bio-Inspired Robotics Lab, University of Cambridge, CB2 1PZ, UK
         {\tt\small dsh46@cam.ac.uk}}%
 }
@@ -53,12 +55,12 @@ Multi-touch Recognition of Hydrogel E-skins using [MORE SPECIFIC APPROACH DETAIL
 
 \input{main}
 
-\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
-                                  % on the last page of the document manually. It shortens
-                                  % the textheight of the last page by a suitable amount.
-                                  % This command does not take effect until the next page
-                                  % so it should come on the page before the last. Make
-                                  % sure that you do not shorten the textheight too much.
+% \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+%                                   % on the last page of the document manually. It shortens
+%                                   % the textheight of the last page by a suitable amount.
+%                                   % This command does not take effect until the next page
+%                                   % so it should come on the page before the last. Make
+%                                   % sure that you do not shorten the textheight too much.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -73,8 +75,13 @@ Multi-touch Recognition of Hydrogel E-skins using [MORE SPECIFIC APPROACH DETAIL
 
 % Appendixes should appear before the acknowledgment.
 
+\FloatBarrier
+
+\section*{DATA AVAILABILITY}
+Code is available on GitHub at the directory {\tt \href{https://github.com/lorcan2440/EIT\_Touch\_Sensor/blob/main/src/urop-data-analysis.ipynb}{https://github.com/lorcan2440/ \\ EIT\_Touch\_Sensor/blob/main/ \\ src/urop-data-analysis.ipynb}}.
+
 \section*{ACKNOWLEDGMENT}
-This work was supported by the Samsung Global Research Outreach Program (NUMBER), and by by EPSRC  DTP EP/R513180/1.
+This work was supported by the Samsung Global Research Outreach Program (GRO G118293), and by by EPSRC DTP EP/R513180/1.
 
 \section*{Author Disclosure Statement}
 The authors declare no competing interests.
