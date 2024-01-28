@@ -1,3 +1,8 @@
+# add src folder to path
+import sys
+sys.path.append('src')
+
+
 from RectEIT import RectEIT
 from utils import *
 
@@ -147,7 +152,7 @@ def gen_fig_1(collect_data: bool = True):
 
     # The figure takes about 10 minutes to generate from new data.
 
-    FIG_DATA = 'output/Figure 1/Fig_1_Data.xlsx'
+    FIG_DATA = 'media/Figure 1/Fig_1_Data (raw).xlsx'
 
     # create output save file
     if collect_data and not os.path.exists(FIG_DATA):
@@ -287,8 +292,8 @@ def gen_fig_1(collect_data: bool = True):
 
     # show
     plt.subplots_adjust(hspace=0.5)
-    plt.savefig('output/Figure 1/Fig_1.pdf', format='pdf')
-    #plt.savefig('output/Figure 1/Fig_1.png', format='png')
+    plt.savefig('media/Figure 1/Fig_1.pdf', format='pdf')
+    #plt.savefig('media/Figure 1/Fig_1.png', format='png')
     plt.show()
 
 
